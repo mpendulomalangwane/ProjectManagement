@@ -1,0 +1,62 @@
+﻿
+@model Models.CustomModel
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblUsers').dataTable({
+            "sScrollX": "100%",
+            "sScrollXInner": "110%",
+            "iDisplayLength": 5,
+            "bRetrieve": true
+        });
+    });  
+</script> 
+
+<div id="dv_popup" class="dv_popup_visible">
+            
+@*@using (Html.BeginForm("addUsertoProject", "Project"))
+{
+    
+    *@<form id="frmProjectAddUser" method="post" action="/Project/addUsertoProject">
+    
+    @Html.HiddenFor(m => m.EntityId)
+    
+    <table id="tblUsers" class="tbl_entity_lists" style="width: 70%">
+        <thead>            
+        <tr align="left">
+            <th style="width:10px"></th>            
+            <th>Fullname</th>
+        </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                for (int i = 0; i < Model.anyentity.Count; i++)
+                {
+                <tr>
+                    <td style="width:10px">@Html.CheckBoxFor(m => m.anyentity[i].boolValue) @Html.HiddenFor(m => m.anyentity[i].Id)</td>
+                    <td>@Html.DisplayFor(m => m.anyentity[i].Name)</td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <input type="submit" id="btnSaveComment" class="btn_ok" value="Add"  />
+    <input type="button" id="btnCancel" class="btn_cancel" value="Cancel" />
+        </form>
+@*}*@
+    
+
+
+
+
+</div>
+
+<script>
+
+    $('#btnCancel').click(function () {
+        $('#dv_popup').hide();
+        $('#dvOverlay').hide();
+    });
+
+</script>

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/CustomCss/css")
+    @Styles.Render("~/Content/HelperCss/css")
+
+    @Styles.Render("~/Content/themes/base/css")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/Scripts/CustomScripts")
+    @Scripts.Render("~/bundles/Scripts/HelperScripts")
+ 
+</head>
+<body>
+    
+    <div id="dv_header" class="dv_header">
+        <div id="dv_logo">
+
+        </div>
+        <div id="dv_menu" class="dv_menu">
+            <table class="tbl_btn_menu">
+                <tr>
+                    <td class="tbl_cell_btn_menu">@Html.ActionLink("Home", "Index", "Home", null, htmlAttributes: new { @class = "btn_menu" })</td>
+                    <td class="tbl_cell_btn_menu">@Html.ActionLink("About Us", "Index", "Main", null, htmlAttributes: new { @class = "btn_menu" })</td>
+                    <td class="tbl_cell_btn_menu">@Html.ActionLink("Contact Us", "Index", "Main", null, htmlAttributes: new { @class = "btn_menu" })</td>
+                </tr>
+            </table>
+        </div>
+        <div id="dv_user" class="dv_user">
+
+        </div>
+    </div>
+
+    <div id="dv_body" class="dv_body">
+        @RenderBody()
+    </div>
+
+    <div id="dv_footer" class="dv_footer">
+
+    </div>
+
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

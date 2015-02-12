@@ -1,0 +1,75 @@
+﻿@model Models.TaskResolution
+
+<input type="hidden" value="Task" id="hdEntity" />
+<input type="hidden" value="Task" id="hdPage" />
+
+<script src="~/Scripts/CustomScripts/Common.js"></script>
+
+<div id="dv_popup" class="dv_popup_visible">
+    
+    <form id="frmResolveTask" method="post" action="/Task/ResolveTask">
+        
+        <h2 id="h2GM" class="h2_tab_title">Resolve Task</h2>
+        
+        <table id="tblCreateProject" class="tbl_entity_table">
+            <tr>
+                <td colspan="2">
+                    @Html.LabelFor(m => m.TaskName, htmlAttributes: new { @class = "lbl_form" })
+                    <br />
+                    @Html.HiddenFor(m => m.TaskId)
+                    @Html.TextBoxFor(m => m.TaskName, htmlAttributes: new { @class = "txt_input_invisible", @readonly = true })
+                </td>
+            </tr>
+            <tr>
+                    <td colspan="2">
+                        <br />
+                        @Html.Label("Resolution State", htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        <div id="dvState" class="wrapper-dropdown-3" tabindex="1">
+						    @Html.TextBoxFor(m => m.TaskStateName, htmlAttributes: new { @class = "txt_short_input_visible" })
+                            @Html.HiddenFor(m => m.TaskStateId)
+						    <ul id="ulState" class="dropdown" style="width:40%">
+                                @{   
+                                    var state = (List<Models.TaskState>)ViewData["TaskState"];
+                                    if(state != null){
+                                    foreach (var item in state)
+                                    {
+                                        <li id="@item.Id"><a href="#"><i class="icon-envelope icon-large"></i>@item.Name</a></li>
+                                    }
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            <tr>
+                    <td>
+                        @Html.LabelFor(m=>m.Hours, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.EditorFor(m=>m.Hours)
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.LabelFor(m=>m.CommentText, htmlAttributes: new { @class = "lbl_form" })
+                    <br />
+                    @Html.TextAreaFor(m=>m.CommentText, htmlAttributes: new { @class = "txtarea_input_visible" })
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit" id="btnSaveComment" class="btn_ok" value="Resolve"  />
+        <input type="button" id="btnCancel" class="btn_cancel" value="Cancel" />
+        <script>
+            $('#btnCancel').click(function () {
+                $('#dv_popup').hide();
+                $('#dvOverlay').hide();
+            });
+
+        </script>
+    </form>
+
+</div>
+

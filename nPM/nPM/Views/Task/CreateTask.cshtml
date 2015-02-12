@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "AddTask";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<input type="hidden" value="Task" id="hdEntity" />
+<input type="hidden" value="Create" id="hdPage" />
+<input type="hidden" value="" id="hdInfo" />
+
+
+@model Models.Task 
+
+
+<div id="dvSectionRight">  
+
+    <form id="frmCreateTask" method="post" action="/Task/CreateTask">
+        <div id="dvCreateProject" class="dv_entity_form">
+
+            <h2 id="h2GM" class="h2_tab_title">Complete Task Form</h2>
+
+            <table id="tblCreateTask" class="tbl_entity_table">
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "txt_input_visible" })
+                    </td>
+                    <td>
+                         @Html.LabelFor(m => m.AssigneeName, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.HiddenFor(m => m.AssigneeId)
+                        @Html.TextBoxFor(m => m.AssigneeName,htmlAttributes: new { @class = "txt_input_visible" })
+                        <script>
+                            $("#AssigneeName").autocomplete({
+                                source: function (request, response) {
+                                    $.ajax({
+                                        url: "/Task/getUsers",
+                                        type: "get",
+                                        dataType: "json",
+                                        data: { term: request.term },
+                                        success: function (data) {
+                                            response($.map(data.success, function (item) {
+                                                return { value: item.Id, label: item.Name };
+                                            }))
+                                        }
+                                    });
+                                },
+                                minLength: 2,
+                                delay: 1,
+                                focus: function (event, ui) {
+                                    $("#AssigneeName").val(ui.item.label);
+                                    return false;
+                                },
+                                select: function (event, ui) {
+                                    event.preventDefault();
+                                    if (ui.item) {
+                                        $('#AssigneeName').val(ui.item.label);
+                                        $('#AssigneeId').val(ui.item.value);
+                                    }
+                                }
+                            });
+	                    </script>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.Label("Select a Project", htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.HiddenFor(m => m.ProjectId, htmlAttributes: new { @class = "lbl_form" })
+                        @Html.TextBoxFor(m => m.ProjectName, htmlAttributes: new { @class = "txt_input_visible" })
+                        <script>
+                            //auto complete text for project
+                            $('#ProjectName').autocomplete({
+                                source: function (request, response) {
+                                    $.ajax({
+                                        url: "/Task/getProjects",
+                                        type: "get",
+                                        dataType: "json",
+                                        data: { term: request.term },
+                                        success: function (data) {
+                                            response($.map(data.success, function (item) {
+                                                return { label: item.Name, value: item.Id };
+                                            }))
+                                        }
+                                    });
+                                },
+                                minLength: 2,
+                                delay: 1,
+                                focus: function (event, ui) {
+                                    $("#ProjectName").val(ui.item.label);
+                                    return false;
+                                },
+                                select: function (event, ui) {
+                                    event.preventDefault();
+                                    if (ui.item) {
+                                        $('#ProjectName').val(ui.item.label);
+                                        $('#ProjectId').val(ui.item.value);
+                                    }
+                                }
+                            });
+                        </script>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                         @Html.Label("Start Time", htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.StartTime, htmlAttributes: new { @class = "txt_input_visible" })
+                         <script>
+                             $('#StartTime').datepicker({
+                                 changeMonth: true,
+                                 changeYear: true,
+                                 minDate: 0,
+                                 showButtonPanel: true
+                             });
+                        </script>
+                    </td>
+                    <td>
+                         @Html.Label("Start End", htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.EndTime, htmlAttributes: new { @class = "txt_input_visible" })
+                         <script>
+                             $('#EndTime').datepicker({
+                                 changeMonth: true,
+                                 changeYear: true,
+                                 minDate: 0,
+                                 showButtonPanel: true
+                             });
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextAreaFor(m => m.Description, htmlAttributes: new { @class = "txtarea_input_visible" })
+                    </td>
+                </tr>                
+                <tr>
+                </tr>
+            </table>
+
+        </div>
+
+    </form>
+
+</div>
+<script src="~/Scripts/globalize.js"></script>
+    <script src="~/Scripts/globalize.culture.fr-FR.js"></script>
+    <script>
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) ||
+                !isNaN(Globalize.parseFloat(value));
+        }
+        $(document).ready(function () {
+            Globalize.culture('fr-FR');
+        });
+    </script>
+    <script>
+        jQuery.extend(jQuery.validator.methods, {
+            range: function (value, element, param) {
+                //Use the Globalization plugin to parse the value        
+                var val = $.global.parseFloat(value);
+                return this.optional(element) || (
+                    val >= param[0] && val <= param[1]);
+            }
+        });
+        $("#ProjectName").ketpress(function () {
+            $("#AssigneeName").attr("disabled", "false");
+        })
+    </script>

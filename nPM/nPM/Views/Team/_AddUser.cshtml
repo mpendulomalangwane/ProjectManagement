@@ -1,0 +1,95 @@
+﻿@model Models.TeamAddUser
+
+<input type="hidden" value="Task" id="hdEntity" />
+<input type="hidden" value="Task" id="hdPage" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblUsers').dataTable({
+            "sScrollX": "100%",
+            "sScrollXInner": "110%",
+            "iDisplayLength": 5,
+            "bRetrieve": true
+        });
+    });
+</script> 
+
+<div id="dv_popup" class="dv_popup_visible">
+    
+    <form id="frmTeamAddUser" method="post" action="/Team/CreateTeamMember">
+
+        <h2 id="h2GM" class="h2_tab_title">Add User to Team</h2>
+        <table id="tblAddTaskComment" class="tbl_entity_table" style="width: 90%">
+            <tr>
+                <td>
+                    @Html.Label("Team Name", htmlAttributes: new { @class = "lbl_form" }):
+                    @Html.HiddenFor(m => m.team.Id)
+                    @Html.TextBoxFor(m => m.team.Name, htmlAttributes: new { @class = "txt_input_invisible", @readonly = true })
+                    <br />
+                </td>
+            </tr>   
+            <tr>
+                <td>
+                    <br />
+                    <table id="tblUsers" style="width: 70%">
+                        <thead>            
+                        <tr>
+                            <th style="width:10px"><input id="cboxAll" type="checkbox" name="cboxAll"  /></th>            
+                            <th>Fullname</th>
+                        </tr>
+                        </thead>
+                        @if(Model != null)
+                        {
+                        <tbody>
+                            @foreach (var item in Model.users)
+                            {
+                            <tr>                
+                                <td style="width: 10px"><input type="checkbox" name="cboxOne" value="@Html.DisplayFor(m => item.Id)"/></td>
+                                <td>@Html.DisplayFor(m => item.FullName)</td>
+                            </tr>
+                            }
+                        </tbody>
+                        }
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <input type="button" id="btnTeamAddUser" class="btn_ok" value="Add"  />
+        <input type="button" id="btnCancel" class="btn_cancel" value="Cancel" />
+        <script>
+            $('#btnCancel').click(function () {
+                $('#dv_popup').hide();
+                $('#dvOverlay').hide();
+            });
+            $('#btnTeamAddUser').click(function () {
+                debugger
+                var cbox = $('input[name="cboxOne"]:checked');
+                var selectedUserIds = new Array();
+                for (var i = 0; i < cbox.length; i++) {
+                    selectedUserIds.push(cbox[i].value);
+                }
+                var TeamId = $('#team_Id').val();
+                $.ajax({
+                    type: "get",
+                    url: "/Team/CreateTeamMember",
+                    data: { team_id: TeamId, users: selectedUserIds },
+                    traditional: true,
+                    success: function (data) {
+                        $("#dvSectionRight").html(data);
+                        toastr.success("user(s) successfully deleted");
+                        //$('#dvCancellation').hide();
+                        //$('#dvOverlay').hide();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        error_handlerXML('Error occured while open SR', XMLHttpRequest);
+                    }
+                });
+                //$('#frmTeamAddUser').submit();
+            });
+
+        </script>
+    </form>
+
+</div>
+

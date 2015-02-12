@@ -1,0 +1,77 @@
+﻿@model Models.CustomModel
+
+<input type="hidden" value="Roles" id="hdEntity" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblProjects').dataTable({
+            "sScrollX": "100%",
+            "sScrollXInner": "110%",
+            "bRetrieve": true
+        });
+    });
+</script> 
+
+<div id="dv_popup" class="dv_popup_visible">
+
+    
+    <form id="frmManageProjectUser" method="post" action="/User/updateProjectUsers">
+        @Html.HiddenFor(m => m.EntityId)
+        <table id="tblProjects" class="tbl_entity_lists">
+        <thead>            
+        <tr >
+            <th style="width:10px"></th>            
+            <th><input type="text" id="UserName" class="txt_input_invisible" /><input type="hidden" id="user_id" /></th>
+        </tr>
+        </thead>
+                        @if(Model != null)
+                        {
+                        <tbody>
+                            @for (int i = 0; i < Model.anyentity.Count; i++)
+                            {
+                            <tr>                
+                                <td style="width:10px" >@Html.CheckBoxFor(m => m.anyentity[i].boolValue) @Html.HiddenFor(m => m.anyentity[i].Id)</td>
+                                <td>@Html.DisplayFor(m => m.anyentity[i].Name)</td>
+                            </tr>
+                            }
+                        </tbody>
+                        }
+                    </table>
+
+        <input type="submit" id="btnAddUserToProject" class="btn_ok" value="Add "  />
+        <input type="button" id="btnCancel" class="btn_cancel" value="Cancel" />
+
+        <script>
+            $('#btnCancel').click(function () {
+                $('#dv_popup').hide();
+                $('#dvOverlay').hide();
+            });
+            $('#btnAddUserToProject').click(function () {
+                debugger;
+               var cbox = $('input[name="cboxOne"]:checked');
+                var selectedUserIds = new Array();
+                for (var i = 0; i < anyentity.length; i++) {
+                    selectedUserIds.push(anyentity[i].value);
+                }
+                var UserId_ = $('#user_id').val();
+                $.ajax({
+                    type: "get",
+                    url: "/User/updateProjectUsers",
+                    beforeSend: function (xhr) {
+                        //load();
+                    },
+                    success: function (data) {
+                        $("#dv_popup").html(data);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $('#dvLoading').hide();
+                        error_handlerXML('Error occured while opening add ' + entity + ' Page', XMLHttpRequest);
+                    }
+                });
+                //$('#frmTeamAddUser').submit();
+            });
+        </script>
+    </form>
+
+</div>
+

@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "CreateTeam";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model Models.Team
+
+<input type="hidden" value="Team" id="hdEntity" />
+<input type="hidden" value="Create" id="hdPage" />
+
+
+<div id="dvSectionRight">
+
+    <form id="frmCreateTeam" method="post" action="/Team/CreateTeam">
+
+        <div id="dvCreateTask" class="dv_entity_form">
+
+            <h2 id="h2GM" class="h2_tab_title">Complete Team Form</h2>
+
+            <table id="tblCreateProject" class="tbl_entity_table">
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Name):
+                        <br />
+                        @Html.TextBoxFor(m => m.Name , htmlAttributes: new { @class = "txt_short_input_visible" })
+                    </td>
+                    <td></td>
+                </tr>
+            </table>   
+
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,94 @@
+﻿@model Models.CustomModel
+
+<input type="hidden" value="Role" id="hdEntity" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblRoless').dataTable({
+            "sScrollX": "100%",
+            "sScrollXInner": "110%",
+            "bRetrieve": true
+        });
+    });
+</script> 
+
+<div id="dv_popup" class="dv_popup_visible">
+    
+    <form id="frmManageRole" method="post" action="/User/updateRoles">
+
+        @Html.HiddenFor(m => m.EntityId)
+
+        <h2 id="h2GM" class="h2_tab_title">Manage Roles</h2>
+        <table id="tblUserRoles" class="tbl_entity_table" style="width: 90%">
+            <tr>
+                <td>
+                    @Html.Label("User", htmlAttributes: new { @class = "lbl_form" }):               
+                    <br />
+                    <input type="hidden" id="user_id" />
+                    <input type="text" id="UserName" class="txt_input_invisible" />
+                    <br />
+                </td>
+            </tr>   
+            <tr>
+                <td>
+                    <br />
+                    <table id="tblRoles" class="tbl_any_entitys">
+                        <thead>            
+                        <tr>          
+                            <th colspan="2" style="text-align: left">Roles</th>
+                        </tr>
+                        </thead>
+                        @if(Model != null)
+                        {
+                        <tbody>
+                            @for (int i = 0; i < Model.anyentity.Count; i++)
+                            {
+                            <tr>                
+                                <td style="width:10px" >@Html.CheckBoxFor(m => m.anyentity[i].boolValue) @Html.HiddenFor(m => m.anyentity[i].Id)</td>
+                                <td>@Html.DisplayFor(m => m.anyentity[i].Name)</td>
+                            </tr>
+                            }
+                        </tbody>
+                        }
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit" id="btnRoleAddUser" class="btn_ok" value="Assign "  />
+        <input type="button" id="btnCancel" class="btn_cancel" value="Cancel" />
+
+        <script>
+            $('#btnCancel').click(function () {
+                $('#dv_popup').hide();
+                $('#dvOverlay').hide();
+            });
+         $('#btnRoleAddUser').click(function () {
+                debugger
+                var cbox = $('input[name="cboxOne"]:checked');
+                var selectedUserIds = new Array();
+                for (var i = 0; i < anyentity.length; i++) {
+                    selectedUserIds.push(anyentity[i].value);
+                }
+                var UserId = $('#user_id').val();
+                $.ajax({
+                    type: "get",
+                    url: "/User/updateRoles",
+                    beforeSend: function (xhr) {
+                        //load();
+                    },
+                    success: function (data) {
+                        $("#dv_popup").html(data);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $('#dvLoading').hide();
+                        error_handlerXML('Error occured while opening add ' + entity + ' Page', XMLHttpRequest);
+                    }
+                });
+                //$('#frmTeamAddUser').submit();
+            });
+        </script>
+    </form>
+
+</div>
+

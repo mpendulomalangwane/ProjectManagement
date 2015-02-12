@@ -1,0 +1,72 @@
+﻿@model Models.TaskTime
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/CustomCss/css")
+    @Styles.Render("~/Content/HelperCss/css")
+
+    @Styles.Render("~/Content/themes/base/css")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+<input type="hidden" value="Task" id="hdEntity" />
+<input type="hidden" value="TaskComment" id="hdPage" />
+
+<div id="dv_popup" class="dv_popup_visible">
+    <form id="frmCreateTaskTime" method="post" action="/Task/CreateTaskTime">
+        <h2 id="h2GM" class="h2_tab_title">Log Time</h2>
+        <table id="tblAddTaskTime" class="tbl_entity_table">
+            <tr>
+                <td colspan="2">
+                    @Html.LabelFor(m => m.TaskName, htmlAttributes: new { @class = "lbl_form" })
+                    <br />
+                    @Html.HiddenFor(m => m.TaskId)
+                    @Html.TextBoxFor(m => m.TaskName, htmlAttributes: new { @class = "txt_input_invisible", @readonly = true })
+                </td>
+                <td>
+                </td>
+            </tr>   
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Duration, htmlAttributes: new { @class = "lbl_form" })
+                    <br />
+                    @Html.TextBoxFor(m => m.Duration , htmlAttributes: new { @class = "txt_short_input_visible"})
+                </td>
+                <td>
+                         
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.LogWorkTime, htmlAttributes: new { @class = "lbl_form" })
+                    <br /> 
+                       @Html.TextBoxFor(m => m.LogWorkTime, htmlAttributes: new { @class = "txt_short_input_visible" })
+                         <script>
+                             $('#LogWorkTime').datepicker({
+                                 changeMonth: true,
+                                 changeYear: true,
+                                 minDate: 0,
+                                 showButtonPanel: true
+                             });
+                        </script>
+                </td>
+                <td>
+                         
+                </td>
+            </tr>
+        </table>
+            <input type="submit" id="btnSaveComment" class="btn_ok" value="Save"  />
+            <input type="button" id="btnCancel" class="btn_cancel" value="Cancel" />
+    </form>
+</div>
+
+        <script>
+            $('#btnCancel').click(function () {
+                $('#dv_popup').hide();
+                $('#dvOverlay').hide();
+            });
+
+        </script>

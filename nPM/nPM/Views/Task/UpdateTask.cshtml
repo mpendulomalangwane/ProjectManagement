@@ -1,0 +1,408 @@
+﻿@{
+    ViewBag.Title = "EditTask";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model Models.Task 
+
+<input type="hidden" value="Task" id="hdEntity" />
+<input type="hidden" value="Edit" id="hdPage" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.tbl_my_entities').dataTable({
+            "sScrollX": "100%",
+            "bRetrieve": true,
+            "iDisplayLength": 5,
+            "sScrollXInner": "110%"
+        });
+    });
+</script> 
+
+<div id="dvNothing">
+</div>
+
+<div id="dvSectionRight">
+  <form id="frmUpdateTask" method="post" action="/Task/UpdateTask">
+
+        @Html.HiddenFor(m => Model.Id) 
+           
+        <div id="dvCreateTask" class="dv_entity_form" >
+
+            <div>
+                <table >
+                    <tr>
+                        <td colspan="1">
+                            <img src="~/Images/icon-task.png" class="imgSubLogo" style="width: 100px; height: 100px;" />
+                        </td>
+                        <td colspan="1">
+                            <h2 class="h2_view_entity_text">@Model.Name</h2>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div align="right" class="dv_tab" style="background-color: transparent; border: none">
+ 
+                
+            </div>            
+
+            <div id="dvGeneralInfo" class="dv_tab">    
+                <h2 id="h2GM" class="h2_tab_title">General Information</h2>
+                <hr /> 
+
+                <table id="tblCreateProject" class="tbl_entity_table">
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "txt_input_visible", @readonly = true })
+                    </td>
+                    <td>
+                        @Html.LabelFor(m => m.ReporterName, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.ReporterName, htmlAttributes: new { @class = "txt_input_visible" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        @Html.LabelFor(m=>m.StartTime, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m=>m.StartTime, htmlAttributes: new { @class = "txt_input_visible" })
+                        <script>
+                            $('#StartTime').datepicker({
+                                changeMonth: true,
+                                changeYear: true,
+                                minDate: 0,
+                                showButtonPanel: true
+                            });
+                        </script>
+                    </td>
+
+                    <td>
+                        <br />
+                        @Html.LabelFor(m => m.EndTime, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.EndTime, htmlAttributes: new { @class = "txt_input_visible"})
+                        <script>
+                            $('#EndTime').datepicker({
+                                changeMonth: true,
+                                changeYear: true,
+                                minDate: 0,
+                                showButtonPanel: true
+                            });
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        @Html.LabelFor(m => m.AssigneeName, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        <table style="width: 100%">
+                            <tr>
+                                <td>
+                                    @Html.HiddenFor(m => m.AssigneeId)
+                                    @Html.TextBoxFor(m => m.AssigneeName, htmlAttributes: new { @class = "txt_input_visible" })
+                                </td>
+                            </tr>
+                        </table> 
+                        <script>
+                            $("#AssigneeName").autocomplete({
+                                source: function (request, response) {
+                                    $.ajax({
+                                        url: "/Task/getUsers",
+                                        type: "get",
+                                        dataType: "json",
+                                        data: { term: request.term },
+                                        success: function (data) {
+                                            response($.map(data.success, function (item) {
+                                                return { value: item.Id, label: item.Name };
+                                            }))
+                                        }
+                                    });
+                                },
+                                minLength: 2,
+                                delay: 1,
+                                focus: function (event, ui) {
+                                    $("#AssigneeName").val(ui.item.label);
+                                    return false;
+                                },
+                                select: function (event, ui) {
+                                    if (ui.item) {
+                                        $('#AssigneeName').val(ui.item.label);
+                                        $('#AssigneeId').val(ui.item.value);
+                                    }
+                                    return false;
+                                }
+                            });
+	                    </script>
+                    </td>
+                    <td>
+                        <br />
+                        @Html.Label("Project")
+                        <br />
+                        <table style="width: 100%">
+                            <tr>
+                                <td>
+                                    @Html.HiddenFor(m => m.ProjectId, htmlAttributes: new { @class = "lbl_form" })
+                                    @Html.TextBoxFor(m => m.ProjectName, htmlAttributes: new { @class = "txt_input_visible", @readonly = true  })
+                                </td>
+                            </tr>
+                        </table>        
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        @Html.LabelFor(m=>m.IsLinked, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.EditorFor(m => m.IsLinked)
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <br />
+                        @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextAreaFor(m => m.Description, htmlAttributes: new { @class = "txtarea_input_visible" })
+                    </td>
+                </tr>                
+                <tr>
+                    <td>                            
+                        <br />
+                        @Html.LabelFor(m => m.StateName, htmlAttributes: new { @class = "lbl_form" })
+                        <br />                                                                           
+					    <div id="dvState" class="wrapper-dropdown-3" tabindex="1">
+						    @Html.TextBoxFor(m => m.StateName, htmlAttributes: new { @class = "txt_input_visible" })
+                            @Html.HiddenFor(m => m.StateId)
+						    <ul id="ulState" class="dropdown">
+                                @{   
+                                    var state = (List<Models.State>)ViewData["States"];
+                                    foreach (var item in state)
+                                    {
+                                        <li id="@item.Id"><a href="#"><i class="icon-envelope icon-large"></i>@item.Name</a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </td>
+                    <td>                            
+                        <br />
+                        @Html.LabelFor(m => m.TaskStateName, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        <div id="dvTaskState" class="wrapper-dropdown-3" tabindex="1">
+						    @Html.TextBoxFor(m => m.TaskStateName, htmlAttributes: new { @class = "txt_input_visible" })
+                            @Html.HiddenFor(m => m.TaskStateId)
+						    <ul id="ulTaskState" class="dropdown">
+                                @{   
+                                    var task_state = (List<Models.TaskState>)ViewData["TaskState"];
+                                    foreach (var item in task_state)
+                                    {
+                                        <li id="@item.Id"><a href="#"><i class="icon-envelope icon-large"></i>@item.Name</a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>                           
+                        </td>
+                </tr>
+            </table>
+
+            </div>
+
+            <br />
+            
+            <div id="dvTaskTime" class="dv_related_rec_tab">   
+                <div id="dvOptions">
+                    <table style="width: 100%">
+                        <tr>
+                            <td align="left">
+                                <h2 id="h2SR" class="h2_tab_title">Time Tracking</h2>
+                            </td>
+                            <td align="right">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img id="imgAddTime" src="~/Images/icon-plus.png" class="img_table_icon" title="Log time" />
+                                        </td>
+                                        <td >
+                                            <img id="imgRemoveTime" src="~/Images/icon-minus.png" class="img_table_icon" style="display: none" title="Remove task" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />                    
+                <div id="dvTimeTracking">            
+                    <table class="tbl_my_entities">
+                        <thead>            
+                            <tr>       
+                                <th style="width: 20px;">Hours</th> 
+                                <th>Date Logged</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @{
+                            var tasktime = (List<Models.TaskTime>)ViewData["TaskTime"];
+                            if (tasktime != null)
+                            {
+                                foreach (var item in tasktime)
+                                { 
+                                    <tr>    
+                                        <td style="width: 20px;">@item.Duration</td>
+                                        <td>@item.CreatedOn</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                        </tbody>                                            
+                    </table>
+                </div>
+            </div>            
+
+            <br />
+
+            <div id="dvComments" class="dv_related_rec_tab">   
+                <div id="dvOption">
+                    <table style="width: 100%">
+                        <tr>
+                            <td align="left">
+                                <h2 id="h2Comment" class="h2_tab_title">Comments</h2>
+                            </td>
+                            <td align="right">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img id="imgAddComment" src="~/Images/icon-plus.png" class="img_table_icon" title="Add comment" />
+                                        </td>
+                                        <td >
+                                            <img id="imgRemoveComment" src="~/Images/icon-minus.png" class="img_table_icon" style="display: none" title="Remove task" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />                    
+                <div id="dvComment">            
+                    <table class="tbl_my_entities">
+                        <thead>            
+                            <tr>       
+                                <th>Comments</th>                                 
+                                <th style="width: 100px">Owner</th>
+                                <th style="width: 120px">Commented On</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @{
+                              var comments = (List<Models.TaskComment>)ViewData["Comments"];
+                              if (comments != null)
+                              {
+                                  foreach (var item in comments)
+                                  { 
+                                        <tr>    
+                                            <td>@item.Comment</td>
+                                            <td style="width: 100px;">@item.CreatedByName</td>
+                                            <td style="width: 120px;">@item.CreatedOn</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>                                            
+                    </table>
+                </div>
+            </div>  
+
+            <br />
+
+            <div id="dvLinkedTask" class="dv_related_rec_tab">   
+                <div id="dvOptions">
+                    <table style="width: 100%">
+                        <tr>
+                            <td align="left">
+                                <h2 id="h2SR" class="h2_tab_title">Linked Tasks</h2>
+                            </td>
+                            <td align="right">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />                    
+                <div id="dvTimeTracking">            
+                    <table class="tbl_my_entities">
+                        <thead>            
+                            <tr>       
+                                <th>Name</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @{
+                            var linkedtasks = (List<Models.Task>)ViewData["LinkedTasks"];
+                            if (linkedtasks != null)
+                            {
+                                foreach (var item in linkedtasks)
+                                { 
+                                    <tr>    
+                                        <td>@Html.ActionLink(item.Name, "#", "#", new { record_id = item.Id }, htmlAttributes: new { @class = "link" })</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                        </tbody>                                            
+                    </table>
+                </div>
+            </div> 
+
+            <br />
+
+            <div id="dvDocument" class="dv_related_rec_tab">   
+                <div id="dvOptions">
+                    <table style="width: 100%">
+                        <tr>
+                            <td align="left">
+                                <h2 id="h2SR" class="h2_tab_title">Documents</h2>
+                            </td>
+                            <td align="right">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />                    
+                <div id="dvDocuments">            
+                    <table class="tbl_my_entities">
+                        <thead>            
+                            <tr>       
+                                <th>Name</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @{
+                            var documents = (List<Models.AnyEntity>)ViewData["Documents"];
+                            if (documents != null)
+                            {
+                                foreach (var item in documents)
+                                { 
+                                    <tr>    
+                                        <td>@Html.ActionLink(item.Name, "gotoUpdateDocumentForm", "Document", new { record_id = item.Id }, htmlAttributes: new { @class = "link" })</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                        </tbody>                                            
+                    </table>
+                </div>
+            </div> 
+
+            <br />
+
+        </div>
+
+    </form>
+</div>
+

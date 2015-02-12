@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nPM", "nPM\nPM.csproj", "{5A44AE65-2268-415B-9BA8-0056E56114EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "..\Interface\Interface.csproj", "{D011F1AA-D942-470E-BD39-7961C5C5FC5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "..\Logic\Logic.csproj", "{9519A35E-D13E-4790-89BB-1D0336ECFB15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "..\Models\Models.csproj", "{20DF3606-EFC8-440A-82CD-CCBFFF5718DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A44AE65-2268-415B-9BA8-0056E56114EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A44AE65-2268-415B-9BA8-0056E56114EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A44AE65-2268-415B-9BA8-0056E56114EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A44AE65-2268-415B-9BA8-0056E56114EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D011F1AA-D942-470E-BD39-7961C5C5FC5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D011F1AA-D942-470E-BD39-7961C5C5FC5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D011F1AA-D942-470E-BD39-7961C5C5FC5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D011F1AA-D942-470E-BD39-7961C5C5FC5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9519A35E-D13E-4790-89BB-1D0336ECFB15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9519A35E-D13E-4790-89BB-1D0336ECFB15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9519A35E-D13E-4790-89BB-1D0336ECFB15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9519A35E-D13E-4790-89BB-1D0336ECFB15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20DF3606-EFC8-440A-82CD-CCBFFF5718DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20DF3606-EFC8-440A-82CD-CCBFFF5718DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20DF3606-EFC8-440A-82CD-CCBFFF5718DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20DF3606-EFC8-440A-82CD-CCBFFF5718DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

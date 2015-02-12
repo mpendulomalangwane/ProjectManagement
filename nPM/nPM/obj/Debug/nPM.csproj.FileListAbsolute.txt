@@ -1,0 +1,141 @@
+C:\Work\On the side III\nPM\nPM\bin\nPM.dll
+C:\Work\On the side III\nPM\nPM\bin\nPM.pdb
+C:\Work\On the side III\nPM\nPM\bin\Antlr3.Runtime.dll
+C:\Work\On the side III\nPM\nPM\bin\EntityFramework.dll
+C:\Work\On the side III\nPM\nPM\bin\EntityFramework.SqlServer.dll
+C:\Work\On the side III\nPM\nPM\bin\Microsoft.Web.Infrastructure.dll
+C:\Work\On the side III\nPM\nPM\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Work\On the side III\nPM\nPM\bin\Newtonsoft.Json.dll
+C:\Work\On the side III\nPM\nPM\bin\System.Net.Http.Formatting.dll
+C:\Work\On the side III\nPM\nPM\bin\System.Web.Http.dll
+C:\Work\On the side III\nPM\nPM\bin\System.Web.Http.WebHost.dll
+C:\Work\On the side III\nPM\nPM\bin\System.Web.Mvc.dll
+C:\Work\On the side III\nPM\nPM\bin\System.Web.Optimization.dll
+C:\Work\On the side III\nPM\nPM\bin\System.Web.Providers.dll
+C:\Work\On the side III\nPM\nPM\bin\System.Web.Razor.dll
+C:\Work\On the side III\nPM\nPM\bin\System.Web.WebPages.Deployment.dll
+C:\Work\On the side III\nPM\nPM\bin\System.Web.WebPages.dll
+C:\Work\On the side III\nPM\nPM\bin\System.Web.WebPages.Razor.dll
+C:\Work\On the side III\nPM\nPM\bin\WebGrease.dll
+C:\Work\On the side III\nPM\nPM\bin\EntityFramework.xml
+C:\Work\On the side III\nPM\nPM\bin\EntityFramework.SqlServer.xml
+C:\Work\On the side III\nPM\nPM\bin\Newtonsoft.Json.xml
+C:\Work\On the side III\nPM\nPM\bin\System.Net.Http.Formatting.xml
+C:\Work\On the side III\nPM\nPM\bin\System.Web.Http.xml
+C:\Work\On the side III\nPM\nPM\bin\System.Web.Http.WebHost.xml
+C:\Work\On the side III\nPM\nPM\bin\System.Web.Mvc.xml
+C:\Work\On the side III\nPM\nPM\bin\System.Web.Razor.xml
+C:\Work\On the side III\nPM\nPM\bin\System.Web.WebPages.xml
+C:\Work\On the side III\nPM\nPM\bin\System.Web.WebPages.Deployment.xml
+C:\Work\On the side III\nPM\nPM\bin\System.Web.WebPages.Razor.xml
+C:\Work\On the side III\nPM\nPM\obj\Debug\nPM.csprojResolveAssemblyReference.cache
+C:\Work\On the side III\nPM\nPM\obj\Debug\nPM.dll
+C:\Work\On the side III\nPM\nPM\obj\Debug\nPM.pdb
+C:\Work\On the side III\nPM\nPM\bin\Interface.dll
+C:\Work\On the side III\nPM\nPM\bin\Logic.dll
+C:\Work\On the side III\nPM\nPM\bin\Models.dll
+C:\Work\On the side III\nPM\nPM\bin\Interface.pdb
+C:\Work\On the side III\nPM\nPM\bin\Logic.pdb
+C:\Work\On the side III\nPM\nPM\bin\Models.pdb
+C:\Work\On the side III\nPM\nPM\bin\Google.DataTable.Net.Wrapper.dll
+C:\Work\On the side III\nPM\nPM\obj\Debug\RdlCompile.cache
+C:\Work\On the side III\nPM\nPM\obj\Debug\RdlCompile.compiled
+C:\Work\On the side III\nPM\nPM\bin\MvcCheckBoxList.dll
+C:\Work\On the side III\nPM\nPM\bin\PagedList.dll
+C:\Work\On the side III\nPM\nPM\bin\PagedList.Mvc.dll
+C:\Work\On the side III\nPM\nPM\bin\PagedList.xml
+C:\Work\On the side III\nPM\nPM\bin\PagedList.Mvc.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\nPM.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\nPM.pdb
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Antlr3.Runtime.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\EntityFramework.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\EntityFramework.SqlServer.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Google.DataTable.Net.Wrapper.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Interface.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Logic.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Models.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\MvcCheckBoxList.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Newtonsoft.Json.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\PagedList.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\PagedList.Mvc.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Net.Http.Formatting.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.Http.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.Http.WebHost.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.Mvc.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.Optimization.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.Providers.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.Razor.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.WebPages.Deployment.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.WebPages.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.WebPages.Razor.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\WebGrease.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Interface.pdb
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Logic.pdb
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Models.pdb
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\EntityFramework.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\EntityFramework.SqlServer.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\PagedList.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\PagedList.Mvc.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\Newtonsoft.Json.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Net.Http.Formatting.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.Http.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.Http.WebHost.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.Mvc.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.Razor.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.WebPages.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.WebPages.Deployment.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\bin\System.Web.WebPages.Razor.xml
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\obj\Debug\nPM.csprojResolveAssemblyReference.cache
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\obj\Debug\RdlCompile.cache
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\obj\Debug\RdlCompile.compiled
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\obj\Debug\nPM.dll
+C:\Users\UCSSMADM\Documents\nPM-1\nPM\nPM\obj\Debug\nPM.pdb
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\nPM.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\nPM.pdb
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Antlr3.Runtime.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\EntityFramework.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\EntityFramework.SqlServer.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Google.DataTable.Net.Wrapper.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Interface.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Logic.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Models.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\MvcCheckBoxList.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Newtonsoft.Json.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\PagedList.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\PagedList.Mvc.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Net.Http.Formatting.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.Http.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.Http.WebHost.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.Mvc.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.Optimization.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.Providers.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.Razor.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.WebPages.Deployment.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.WebPages.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.WebPages.Razor.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\WebGrease.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Interface.pdb
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Logic.pdb
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Models.pdb
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\EntityFramework.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\EntityFramework.SqlServer.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\PagedList.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\PagedList.Mvc.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\Newtonsoft.Json.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Net.Http.Formatting.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.Http.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.Http.WebHost.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.Mvc.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.Razor.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.WebPages.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.WebPages.Deployment.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\bin\System.Web.WebPages.Razor.xml
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\obj\Debug\nPM.csprojResolveAssemblyReference.cache
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\obj\Debug\RdlCompile.cache
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\obj\Debug\RdlCompile.compiled
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\obj\Debug\nPM.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\nPM\nPM\obj\Debug\nPM.pdb

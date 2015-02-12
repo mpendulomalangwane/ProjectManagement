@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+@model IEnumerable<Models.User>
+
+<input type="hidden" value="User" id="hdEntity" />
+<input type="hidden" value="Index" id="hdPage" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblEntityList').dataTable({
+            "sScrollX": "100%",
+            "bRetrieve": true,
+            "sScrollXInner": "110%"
+        });
+    });  
+</script> 
+
+
+<div id="dvSectionRight">
+    <table id="tblEntityList" class="tbl_entity_list">
+        <thead>            
+        <tr>
+            <th style="width:10px"><input id="cboxAll" type="checkbox" name="cboxAll" /></th>            
+            <th>Fullname</th>
+            <th>Email</th>
+            <th>Main Phone</th>
+            <th>Cell Phone</th>
+            <th>Created On</th>
+        </tr>
+        </thead>
+        <tbody>
+            @if(Model != null){
+                foreach (var item in Model)
+                {
+                <tr>                
+                    <td style="width:10px"><input type="checkbox" name="cboxOne" value="@Html.DisplayFor(m => item.Id)"/></td>
+                    <td >@Html.ActionLink(item.FullName, "gotoUpdateUserForm", "User", new { record_id = item.Id }, htmlAttributes: new { @class = "link" })</td>
+                    <td>@Html.DisplayFor(m => item.Email)</td>
+                    <td>@Html.DisplayFor(m => item.PhoneNumber)</td>
+                    <td>@Html.DisplayFor(m => item.CellNumber)</td>
+                    <td>@Html.DisplayFor(m => item.CreatedOn)</td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

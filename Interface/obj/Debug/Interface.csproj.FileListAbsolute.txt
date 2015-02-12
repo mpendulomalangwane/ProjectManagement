@@ -1,0 +1,59 @@
+C:\Work\PM\PM\Interface\bin\Debug\Interface.dll
+C:\Work\PM\PM\Interface\bin\Debug\Interface.pdb
+C:\Work\PM\PM\Interface\bin\Debug\Glimpse.AspNet.dll
+C:\Work\PM\PM\Interface\bin\Debug\Glimpse.Core.dll
+C:\Work\PM\PM\Interface\bin\Debug\Glimpse.Mvc4.dll
+C:\Work\PM\PM\Interface\obj\Debug\Interface.csprojResolveAssemblyReference.cache
+C:\Work\PM\PM\Interface\obj\Debug\Interface.dll
+C:\Work\PM\PM\Interface\obj\Debug\Interface.pdb
+C:\Work\On the side\PM\Interface\bin\Debug\Interface.dll
+C:\Work\On the side\PM\Interface\bin\Debug\Interface.pdb
+C:\Work\On the side\PM\Interface\bin\Debug\Glimpse.AspNet.dll
+C:\Work\On the side\PM\Interface\bin\Debug\Glimpse.Core.dll
+C:\Work\On the side\PM\Interface\bin\Debug\Glimpse.Mvc4.dll
+C:\Work\On the side\PM\Interface\obj\Debug\Interface.csprojResolveAssemblyReference.cache
+C:\Work\On the side\PM\Interface\obj\Debug\Interface.dll
+C:\Work\On the side\PM\Interface\obj\Debug\Interface.pdb
+C:\Work\On the side\New PM\Interface\bin\Debug\Interface.dll
+C:\Work\On the side\New PM\Interface\bin\Debug\Interface.pdb
+C:\Work\On the side\New PM\Interface\obj\Debug\Interface.csprojResolveAssemblyReference.cache
+C:\Work\On the side\New PM\Interface\obj\Debug\Interface.dll
+C:\Work\On the side\New PM\Interface\obj\Debug\Interface.pdb
+C:\Work\On the side\New PM ex\Interface\bin\Debug\Interface.dll
+C:\Work\On the side\New PM ex\Interface\bin\Debug\Interface.pdb
+C:\Work\On the side\New PM ex\Interface\obj\Debug\Interface.csprojResolveAssemblyReference.cache
+C:\Work\On the side\New PM ex\Interface\obj\Debug\Interface.dll
+C:\Work\On the side\New PM ex\Interface\obj\Debug\Interface.pdb
+C:\Work\On the side\NewNewPM\Interface\bin\Debug\Interface.dll
+C:\Work\On the side\NewNewPM\Interface\bin\Debug\Interface.pdb
+C:\Work\On the side\NewNewPM\Interface\obj\Debug\Interface.csprojResolveAssemblyReference.cache
+C:\Work\On the side\NewNewPM\Interface\obj\Debug\Interface.dll
+C:\Work\On the side\NewNewPM\Interface\obj\Debug\Interface.pdb
+C:\Work\On the side\NewNewPM\Interface\bin\Debug\Interface.dll.config
+C:\Work\On the side\NewNewPM\Interface\bin\Debug\EntityFramework.dll
+C:\Work\On the side\NewNewPM\Interface\bin\Debug\EntityFramework.SqlServer.dll
+C:\Work\On the side\NewNewPM\Interface\bin\Debug\EntityFramework.xml
+C:\Work\On the side\NewNewPM\Interface\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\s001tv8\Desktop\PM\Interface\bin\Debug\Interface.dll.config
+C:\Users\s001tv8\Desktop\PM\Interface\bin\Debug\Interface.dll
+C:\Users\s001tv8\Desktop\PM\Interface\bin\Debug\Interface.pdb
+C:\Users\s001tv8\Desktop\PM\Interface\obj\Debug\Interface.dll
+C:\Users\s001tv8\Desktop\PM\Interface\obj\Debug\Interface.pdb
+C:\Users\s001tv8\Desktop\PM\Interface\obj\Debug\Interface.csprojResolveAssemblyReference.cache
+C:\Work\On the side III\Interface\bin\Debug\Interface.dll.config
+C:\Work\On the side III\Interface\bin\Debug\Interface.dll
+C:\Work\On the side III\Interface\bin\Debug\Interface.pdb
+C:\Work\On the side III\Interface\obj\Debug\Interface.csprojResolveAssemblyReference.cache
+C:\Work\On the side III\Interface\obj\Debug\Interface.dll
+C:\Work\On the side III\Interface\obj\Debug\Interface.pdb
+C:\Users\UCSSMADM\Documents\nPM-1\Interface\bin\Debug\Interface.dll.config
+C:\Users\UCSSMADM\Documents\nPM-1\Interface\bin\Debug\Interface.dll
+C:\Users\UCSSMADM\Documents\nPM-1\Interface\bin\Debug\Interface.pdb
+C:\Users\UCSSMADM\Documents\nPM-1\Interface\obj\Debug\Interface.dll
+C:\Users\UCSSMADM\Documents\nPM-1\Interface\obj\Debug\Interface.pdb
+C:\Users\mmalangwane\Documents\my projects\nPM-1\Interface\bin\Debug\Interface.dll.config
+C:\Users\mmalangwane\Documents\my projects\nPM-1\Interface\bin\Debug\Interface.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\Interface\bin\Debug\Interface.pdb
+C:\Users\mmalangwane\Documents\my projects\nPM-1\Interface\obj\Debug\Interface.dll
+C:\Users\mmalangwane\Documents\my projects\nPM-1\Interface\obj\Debug\Interface.pdb
+C:\Users\mmalangwane\Documents\my projects\nPM-1\Interface\obj\Debug\Interface.csprojResolveAssemblyReference.cache

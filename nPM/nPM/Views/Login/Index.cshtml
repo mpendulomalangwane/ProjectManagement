@@ -1,0 +1,34 @@
+﻿@model Models.Login
+
+<link href="~/Content/CustomCss/Login.css" rel="stylesheet" />
+
+<div class="dv_top"></div>
+
+<div id="dv_login" class="dv_login">
+    <form id="frmLogin" method="post" action="/Login/Authenticate" >
+        <table align="center">
+            <tr>
+                <td>
+                    <h2 class="h2_login_text">Login with your credentials</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(m => m.Username, htmlAttributes: new { @class = "txt_input_visible", @placeholder = "Username"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "txt_input_visible", @placeholder = "Password"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" id="btn_login" value="Login" class="btn" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="dv_bottom"></div>

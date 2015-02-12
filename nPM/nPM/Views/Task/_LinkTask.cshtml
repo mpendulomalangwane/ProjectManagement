@@ -1,0 +1,71 @@
+﻿@model Models.LinkedTask
+
+<input type="hidden" value="Task" id="hdEntity" />
+<input type="hidden" value="Task" id="hdPage" />
+
+<div id="dv_popup" class="dv_popup_visible">
+    
+    <form id="frmUpdateTask" method="post" action="/Task/LinkTasks">
+        @Html.HiddenFor(m => Model.Id) 
+        <h2 id="h2GM" class="h2_tab_title">Link Task</h2>
+        <table id="tblAddTaskComment" class="tbl_entity_table">
+            <tr>
+                <td colspan="2">
+                    @Html.Label("Task Name", htmlAttributes: new { @class = "lbl_form" }):
+                    @Html.HiddenFor(m => m.TaskId1)
+                    @Html.TextBoxFor(m => m.TaskName1, htmlAttributes: new { @class = "txt_input_invisible", @readonly = true })
+                </td>
+            </tr>   
+            <tr>
+                <td>
+                    @Html.Label("Task to link", htmlAttributes: new { @class = "lbl_form" })
+                    <br />
+                    @Html.HiddenFor(m => m.TaskId2)
+                    @Html.TextBoxFor(m => m.TaskName2, htmlAttributes: new { @class = "txt_input_visible" })
+                    <script>
+                        $("#TaskName2").autocomplete({
+                            source: function (request, response) {
+                                $.ajax({
+                                    url: "/Task/getTask",
+                                    type: "get",
+                                    dataType: "json",
+                                    data: { term: request.term },
+                                    success: function (data) {
+                                        response($.map(data.success, function (item) {
+                                            return { value: item.Id, label: item.Name };
+                                        }))
+                                    }
+                                });
+                            },
+                            minLength: 2,
+                            delay: 1,
+                            focus: function (event, ui) {
+                                $("#TaskName2").val(ui.item.label);
+                                return false;
+                            },
+                            select: function (event, ui) {
+                                event.preventDefault();
+                                if (ui.item) {
+                                    $('#TaskName2').val(ui.item.label);
+                                    $('#TaskId2').val(ui.item.value);
+                                }
+                            }
+                        });
+	                </script>
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit" id="btnSaveComment" class="btn_ok" value="Link"  />
+        <input type="button" id="btnCancel" class="btn_cancel" value="Cancel" />
+        <script>
+            $('#btnCancel').click(function () {
+                $('#dv_popup').hide();
+                $('#dvOverlay').hide();
+            });
+
+        </script>
+    </form>
+
+</div>
+

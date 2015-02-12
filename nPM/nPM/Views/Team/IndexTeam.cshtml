@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "IndexTeam";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+@model IEnumerable<Models.Team>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblEntityList').dataTable({
+            "sScrollX": "100%",
+            "sScrollXInner": "110%",
+            "bRetrieve": true
+        });
+    });  
+</script> 
+
+<script src="~/Scripts/CustomScripts/common.js"></script>
+
+<input type="hidden" value="Team" id="hdEntity" />
+<input type="hidden" value="All" id="hdPage" />
+
+<div id="dvSectionRight">
+    <table id="tblEntityList" class="tbl_entity_list">
+        <thead>            
+        <tr>
+            <th style="width:10px"><input id="cboxAll" type="checkbox" name="cboxAll"  /></th>            
+            <th>Fullname</th>
+            <th>Created On</th>
+        </tr>
+        </thead>
+        @if(Model != null)
+        {
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>                
+                <td style="width: 10px"><input type="checkbox" name="cboxOne" value="@Html.DisplayFor(m => item.Id)"/></td>
+                <td >@Html.ActionLink(item.Name, "gotoUpdateTeamForm", "Team", new { record_id = item.Id }, htmlAttributes: new { @class = "link" })</td>
+                <td>@Html.DisplayFor(m => item.CreatedOn)</td>
+            </tr>
+            }
+        </tbody>
+        }
+    </table>
+</div>
+
+

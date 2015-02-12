@@ -1,0 +1,504 @@
+﻿@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model Models.User
+
+<input type="hidden" value="User" id="hdEntity" />
+<input type="hidden" value="Edit" id="hdPage" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.tbl_my_entities').dataTable({
+        "sScrollX": "100%",
+        "bRetrieve": true,
+        "iDisplayLength": 5,
+        "sScrollXInner": "110%"
+        });
+    });
+</script> 
+
+<div id="dvNothing">
+</div>
+
+<div id="dvSectionRight">
+
+    <form id="frmUpdateUser" method="post" action="/User/UpdateUser">
+
+        @Html.HiddenFor( m => Model.Id)
+        @Html.HiddenFor( m => Model.UserName)
+
+        <div id="dvCreateUser" class="dv_entity_form" >
+            <div>
+                <table class="">
+                    <tr>
+                        <td colspan="1">
+                            <img src="~/Images/icon-user.png" class="img_view_entity_logo" />
+                        </td>
+                        <td colspan="1">
+                            <h2 class="h2_view_entity_text">@Model.FullName</h2>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div align="right" class="dv_tab" style="background-color: transparent; border: none">
+                <table>
+                    <tr>  
+                        <td style="border: 0px solid #808080; width: 15px">
+                            <a href="@Url.Action("gotoUpdateUserForm","User", new { record_id = Model.Id})">
+                                <img alt="imgRefresh" src="~/Images/icon-Refresh.png" title="Refresh" class="img_refresh"  /> 
+                            </a>
+                            <div id="dv_tooltip_refresh" class="dv_tooltip">Refresh user</div>  
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="dvGeneralInfo" class="dv_tab">    
+                <h2 id="h2GM" class="h2_tab_title">User Information</h2>
+                <hr />        
+                <table id="tblCreateUser" class="tbl_entity_table">
+                    <tr>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.FirstName, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.FirstName, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.LastName, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.LastName, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.IdNumber, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.IdNumber, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.PassportNumber, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.PassportNumber, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.PhoneNumber, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.PhoneNumber, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.CellNumber, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.CellNumber, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                        <td>                            
+                            <br />
+                            @Html.LabelFor(m => m.StateId, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.HiddenFor(m => m.StateId)
+                            @Html.TextBoxFor(m => m.StateName, htmlAttributes: new { @class = "txt_input_visible" })                            
+                            <div class="dv_state">
+                               @{   
+                                     var state = (List<Models.State>)ViewData["States"];
+                                     foreach (var item in (List<Models.State>)ViewData["States"])
+                                     {
+                                         <div class="dv_state_option" id="@item.Id">@item.Name</div>
+                                     }
+                                 }
+                            </div>
+                        </td>
+                        <td>  
+                        </td>
+                    </tr>
+                </table>   
+            </div>
+
+            <br />
+
+            <div id="dvSecurityRoles" class="dv_related_rec_tab">  
+                <div id="dvOptions">
+                    <table style="width: 100%">
+                        <tr>
+                            <td align="left">
+                                <h2 id="h2SR" class="h2_tab_title">Roles</h2>
+                            </td>
+                            <td align="right">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img id="imgAddRole" src="~/Images/icon-plus.png" class="img_table_icon" title="Asign Role to User" />
+                                        </td>
+                                        <td>
+                                            <img id="imgRemoveRole" src="~/Images/icon-minus.png" class="img_table_icon" style="display: none" title="Remove user role" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />
+                <div id="dvSroles" >
+                    @{
+                        var sroles = (List<Models.AnyEntity>)ViewData["Rights"];
+                        if (sroles != null)
+                        {
+                            <div id="dvRights">            
+                                <table id="tblRoles"  class="tbl_my_entities" >
+                                    <thead>            
+                                        <tr>       
+                                            <th style="width: 10px;"></th>     
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var item in (List<Models.AnyEntity>)ViewData["Rights"])
+                                    { 
+                                        <tr>    
+                                            <td  style="width:10px"><input type="checkbox" name="cboxUserRoles" value="@Html.DisplayFor(m => item.Id)"/></td>
+                                            <td>@item.Name</td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+               
+                            </div>
+                        }
+                    }
+                </div>  
+            </div>
+
+            <br />
+
+            <div id="dvProjectUser" class="dv_related_rec_tab">    
+                <div>
+                    <table style="width: 100%">
+                        <tr>
+                            <td align="left" >
+                                <h2 id="h2PR" class="h2_tab_title">Projects</h2>
+                            </td>
+                            <td align="right">
+                                <table>
+                                    <tr>
+                                        <td >
+                                            <img id="imgAddUsertoProject_user" src="~/Images/icon-plus.png" class="img_table_icon" title="Add user to Project" />
+                                        </td>
+                                        <td>
+                                            <img id="imgRemoveUserfromProject_user" src="~/Images/icon-minus.png" class="img_table_icon" style="display: none" title="Remove user from this team" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />
+                @{
+                    var projects = (List<Models.AnyEntity>)ViewData["Projects"];
+                    if (projects != null)
+                    {
+                        <div id="dvMyProject">            
+                            <table id="tblProjects"  class="tbl_my_entities">
+                                <thead>            
+                                    <tr>       
+                                        <th style="width: 10px;"></th>     
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var item in (List<Models.AnyEntity>)ViewData["Projects"])
+                                { 
+                                    <tr>    
+                                        <td  style="width:10px"><input type="checkbox" name="checkBoxProjectUser" value="@Html.DisplayFor(m => item.Id)"/></td>
+                                        <td>@Html.ActionLink(item.Name, "gotoUpdateProjectForm", "Project", new { record_id = item.Id }, htmlAttributes: new { @class = "link" })</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+            </div>
+
+            <br />
+
+        </div>
+
+    </form>
+
+</div>
+
+<div id="dialog">
+    
+</div>
+
+
+<script>
+
+    function create_selection_table(array, ttblId, tblTitle) {
+        //add table 's header
+        var header =
+                    '   <thead>' +
+                    '   <tr>' +
+                    '   <th colspan="2">' + tblTitle + '</th>' +
+                    '   </tr>';
+                    '   </thead>';
+                    '   <tbody>';
+        $('#' + ttblId).append(header);
+        //add table's body
+        for (var i = 0; i < array.length; i++) {
+            if (array[i].isCurrent == true) {
+                var row =
+                        '   <tr>' +
+                        '   <td style="width: 10px;"><input type="checkbox" name="cbox" value="' + array[i].Id + '" checked="checked"/></td>' +
+                        '   <td style="color: #ff6a00">' + array[i].Name + '</td>' +
+                        '   </tr>';
+            }
+            else {
+                var row =
+                        '   <tr>' +
+                        '   <td style="width: 10px;"><input type="checkbox" name="cbox" value="' + array[i].Id + '"/></td>' +
+                        '   <td>' + array[i].Name + '</td>' +
+                        '   </tr>';
+            }
+            $('#tblAnyEntity').append(row);
+        }
+        $('#tblAnyEntity').append('</tbody>');
+    }
+
+    $('input[name="cboxUserRoles"]').click(function () {
+        var cboxes = $('input[name="cboxUserRoles"]:checked');
+        if (cboxes.length > 0) {
+            $('#imgRemoveRole').show();
+        }
+        else {
+            $('#imgRemoveRole').hide();
+        }
+    });
+
+    $('input[name="checkBoxProjectUser"]').click(function () {
+        var cboxes = $('input[name="checkBoxProjectUser"]:checked');
+        if (cboxes.length > 0) {
+            $('#imgRemoveUserfromProject_user').show();
+        }
+        else {
+            $('#imgRemoveUserfromProject_user').hide();
+        }
+    });
+    $('#imgRemoveRole').click(function () {
+        try {
+            debugger
+            var UserId = $('#Id').val();
+            var rows = $('#tblRoles tr');
+            var selectedRoleIds = new Array();
+            for (var i = 0; i < rows.length; i++) {
+                for (var j = 0; j < rows[i].cells.length; j++) {
+                    if (rows[i].cells[j].firstChild) {
+                        if (rows[i].cells[j].firstChild.checked == true) {
+                            selectedRoleIds.push(rows[i].cells[j].firstChild.value);
+                        }
+                    }
+                }
+            }
+            $.ajax({
+
+                type: "get",
+                url: "/User/removeRolesfromUser",
+                traditional: true,
+                datatype:"json",
+                data: { sroleIds: selectedRoleIds, userId: UserId },
+                success: function (data) {
+                    $("#tblAnyEntity tr").remove();
+                    create_selection_table(data.success, "tblAnyEntity", "Security Roles");
+                    $('#dv_popup').show();
+                    $('#dv_popup').show();
+                    $('#dvOverlay').show();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    error_handlerXML('Error occured while fetchin projects', XMLHttpRequest);
+                }
+            });
+          //  event.preventDefault();
+        }
+        catch (e) {
+            toastr.error(e.message);
+        }
+    });
+
+    $('#imgRemoveUserfromProject_user').click(function () {
+        try {
+            debugger
+            var UserId = $('#Id').val();
+            var rows = $('#tblProjects tr');
+            var selectedProjectIds = new Array();
+            for (var i = 0; i < rows.length; i++) {
+                for (var j = 0; j < rows[i].cells.length; j++) {
+                    if (rows[i].cells[j].firstChild) {
+                        if (rows[i].cells[j].firstChild.checked == true) {
+                            selectedProjectIds.push(rows[i].cells[j].firstChild.value);
+                        }
+                    }
+                }
+            }
+            $.ajax({
+
+                type: "get",
+                url: "/User/removeProjectsfromUser",
+                traditional: true,
+                datatype: "json",
+                data: { sProjectIds: selectedProjectIds, userId: UserId },
+                success: function (data) {
+                    $("#tblAnyEntity tr").remove();
+                    create_selection_table(data.success, "tblAnyEntity", "Project users");
+                    $('#dv_popup').show();
+                    $('#dv_popup').show();
+                    $('#dvOverlay').show();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    error_handlerXML('Error occured while fetchin projects', XMLHttpRequest);
+                }
+            });
+            //  event.preventDefault();
+        }
+        catch (e) {
+            toastr.error(e.message);
+        }
+    });
+
+
+    $('#imgCancelPopup').click(function () {
+        $('#dv_popup').hide();
+        $('#dvOverlay').hide();
+    });
+
+    $('#imgOkPopup').click(function (event) {
+        debugger
+        try {
+            var UserId = $('#UserId').val();
+            var selectedRoleIds = new Array();
+            //store selected records from list
+            var rows = $('#tblAnyEntity tr');
+            for (var i = 0; i < rows.length; i++) {
+                for (var j = 0; j < rows[i].cells.length; j++) {
+                    if (rows[i].cells[j].firstChild.checked == true) {
+                        selectedRoleIds.push(rows[i].cells[j].firstChild.value);
+                    }
+                }
+            }
+            var Url = "";
+            if ($('#hdField').val() == "Role") {
+                $.ajax({
+                    type: "get",
+                    url: "/User/addRightstoUser",
+                    traditional: true,
+                    data: { sroleIds: selectedRoleIds, userId: UserId },
+                    success: function (data) {
+                        $("#tblAnyEntity tr").remove();
+                        create_selection_table(data.success, "tblAnyEntity", "Users");
+                        $('#dv_popup').show();
+                        $('#dv_popup').show();
+                        $('#dvOverlay').show();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        error_handlerXML('Error occured while open SR', XMLHttpRequest);
+                    }
+                });
+            }
+            if ($('#hdField').val() == "Project") {
+                $.ajax({
+                    type: "get",
+                    url: "/User/addUsertoProject",
+                    traditional: true,
+                    data: { projectIds: selectedRoleIds, userId: UserId },
+                    success: function (data) {
+                        $("#tblAnyEntity tr").remove();
+                        create_selection_table(data.success, "tblAnyEntity", "Users");
+                        $('#dv_popup').show();
+                        $('#dv_popup').show();
+                        $('#dvOverlay').show();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        error_handlerXML('Error occured while open SR', XMLHttpRequest);
+                    }
+                });
+            }
+            $.ajax({
+                type: "get",
+                url: Url,
+                traditional: true,
+                data: { sroleIds: selectedRoleIds, userId: UserId },
+                success: function (data) {
+                    $("#tblAnyEntity tr").remove();
+                    create_selection_table(data.success, "tblAnyEntity", "Users");
+                    $('#dv_popup').show();
+                    $('#dv_popup').show();
+                    $('#dvOverlay').show();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    error_handlerXML('Error occured while open SR', XMLHttpRequest);
+                }
+            });
+            $('#dv_popup').hide();
+            $('#dvOverlay').hide();
+            event.preventDefault();
+        }
+        catch (e) {
+            toastr.error(e.message);
+        }        
+    });
+
+    $('#imgAddUsertoProject').click(function () {
+        try {
+            debugger
+            var rows = $('#tblProjects tr');
+            var selectedRoleIds = new Array();
+            for (var i = 0; i < rows.length; i++) {
+                for (var j = 0; j < rows[i].cells.length; j++) {
+                    if (rows[i].cells[j].firstChild) {
+                        selectedRoleIds.push(rows[i].cells[j].firstChild.value);
+                    }
+                }
+            }
+            $.ajax({
+                type: "get",
+                url: "/User/getAllProjects",
+                traditional: true,
+                data: { sroleIds: selectedRoleIds },
+                success: function (data) {
+                    $("#tblAnyEntity tr").remove();
+                    create_selection_table(data.success, "tblAnyEntity", "Projects");
+                    $('#dv_popup').show();
+                    $('#dv_popup').show();
+                    $('#dvOverlay').show();
+                    $('#hdField').val("Project");
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    error_handlerXML('Error occured while fetchin projects', XMLHttpRequest);
+                }
+            });
+            event.preventDefault();
+        }
+        catch (e) {
+            toastr.error(e.message);
+        }
+    });
+
+
+
+</script>

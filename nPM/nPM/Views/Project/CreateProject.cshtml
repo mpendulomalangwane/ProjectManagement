@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "AddProject";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model Models.Project
+
+<input type="hidden" value="Project" id="hdEntity" />
+<input type="hidden" value="Create" id="hdPage" />
+
+<div id="dvSectionRight">
+
+    <form id="frmCreateProject" method="post" action="/Project/CreateProject">
+
+        <div id="dvCreateProject" class="dv_entity_form">
+
+            <h2 id="h2GM" class="h2_tab_title">Complete Project Form</h2>
+
+            <table id="tblCreateProject" class="tbl_entity_table">
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "txt_input_visible" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(m => m.Budget, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Budget, htmlAttributes: new { @class = "txt_input_visible" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.StartTime, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.StartTime, htmlAttributes: new { @class = "txt_input_visible" })
+                        <script>
+                            $('#StartTime').datepicker({
+                                changeMonth: true,
+                                changeYear: true,
+                                minDate: 0,
+                                showButtonPanel: true
+                            });
+                        </script>
+                    </td>
+                    <td>
+                        @Html.LabelFor(m => m.EndTime, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.EndTime, htmlAttributes: new { @class = "txt_input_visible" })
+                        <script>
+                            $('#EndTime').datepicker({
+                                changeMonth: true,
+                                changeYear: true,
+                                minDate: 0,
+                                showButtonPanel: true
+                            });
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                            @Html.LabelFor(m => m.ClientName, htmlAttributes: new { @class = "lbl_form" })
+                            <br />
+                            <table style="width: 100%">
+                                <tr>
+                                    <td>
+                                        @Html.HiddenFor(m => m.ClientId)
+                                        @Html.TextBoxFor(m => m.ClientName, htmlAttributes: new { @class = "txt_input_visible" })
+                                    </td>
+                                </tr>
+                            </table> 
+                        <script>
+                            $("#ClientName").autocomplete({
+                                source: function (request, response) {
+                                    $.ajax({
+                                        url: "/Project/getClients",
+                                        type: "get",
+                                        dataType: "json",
+                                        data: { term: request.term },
+                                        success: function (data) {
+                                            response($.map(data.success, function (item) {
+                                                return { value: item.Id, label: item.Name };
+                                            }))
+                                        }
+                                    });
+                                },
+                                minLength: 1,
+                                delay: 1,
+                                focus: function (event, ui) {
+                                    $("#ClientName").val(ui.item.label);
+                                    return CompanyName;
+                                },
+                                select: function (event, ui) {
+                                    event.preventDefault();
+                                    if (ui.item) {
+                                        $('#ClientName').val(ui.item.label);
+                                        $('#ClientId').val(ui.item.value);
+                                    }
+                                }
+                            });
+	                    </script>
+                    </td>
+                    <td>
+                        <br />
+                            @Html.LabelFor(m => m.ManagerName, htmlAttributes: new { @class = "lbl_form" })
+                            <br />
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td >                                        
+                                        @Html.HiddenFor(m => m.ManagerId)
+                                        @Html.TextBoxFor(m => m.ManagerName, htmlAttributes: new { @class = "txt_input_visible" })
+                                    </td>
+                                </tr>
+                            </table>
+                        <script>
+                            $("#ManagerName").autocomplete({
+                                source: function (request, response) {
+                                    $.ajax({
+                                        url: "/Project/getPM",
+                                        type: "get",
+                                        dataType: "json",
+                                        data: { term: request.term },
+                                        success: function (data) {
+                                            response($.map(data.success, function (item) {
+                                                return { value: item.Id, label: item.Name };
+                                            }))
+                                        }
+                                    });
+                                },
+                                minLength: 2,
+                                delay: 1,
+                                focus: function (event, ui) {
+                                    $("#ManagerName").val(ui.item.label);
+                                    return false;
+                                },
+                                select: function (event, ui) {
+                                    event.preventDefault();
+                                    if (ui.item) {
+                                        $('#ManagerName').val(ui.item.label);
+                                        $('#ManagerId').val(ui.item.value);
+                                    }
+                                }
+                            });
+	                    </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextAreaFor(m => m.Description, htmlAttributes: new { @class = "txtarea_input_visible" })
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+    </form>
+
+</div>

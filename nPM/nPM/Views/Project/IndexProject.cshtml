@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model IEnumerable<Models.Project>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblEntityList').dataTable({
+            "sScrollX": "100%",
+            "bRetrieve": true,
+            "sScrollXInner": "110%"
+        });
+    });  
+</script> 
+
+<input type="hidden" value="Project" id="hdEntity" />
+<input type="hidden" value="Index" id="hdPage" />
+
+<div id="dvSectionRight">
+
+    <table id="tblEntityList" class="tbl_entity_list">
+        <thead>            
+        <tr>
+            <th style="width: 10px"><input id="cboxAll" type="checkbox" name="cboxAll" /></th>            
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Budget</th>
+            <th>Company</th>
+            <th>Created On</th>
+        </tr>
+        </thead>
+        @if(Model != null){
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>                
+                <td style="width: 10px"><input type="checkbox" name="cboxOne" value="@Html.DisplayFor(m => item.Id)"/></td>
+                <td >@Html.ActionLink(item.Name, "gotoUpdateProjectForm", "Project", new { record_id = item.Id }, htmlAttributes: new { @class = "link" })</td>
+                <td>@Html.DisplayFor(m => item.StartTime)</td>
+                <td>@Html.DisplayFor(m => item.EndTime)</td>
+                <td>@Html.DisplayFor(m => item.Budget)</td>
+                <td >@Html.ActionLink(item.ClientName, "gotoUpdateClientForm", "Client", new { record_id = item.ClientId }, htmlAttributes: new { @class = "link" })</td>
+                <td>@Html.DisplayFor(m => item.CreatedOn)</td>
+            </tr>
+            }
+        </tbody>
+        }
+    </table>
+
+</div>
+
+
+

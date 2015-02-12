@@ -1,0 +1,147 @@
+﻿
+
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="dv_user">
+@{
+    var cookieValue = Request.Cookies["udetails"].Value;    
+
+        <label class="lbl_userdetails"> @cookieValue </label> 
+}  
+</div>
+
+<div id="dv_section_up" class="dv_section_up"> 
+    <table id="tblPermission" style="width: auto; padding-left: 1%; width: auto">
+        <tr id="trPermission">            
+            @{
+                var ribbon_button =(System.Data.DataTable)ViewData["Ribbon"];
+                if (ribbon_button != null)
+                {
+                    for (var i = 0; i < ribbon_button.Rows.Count; i++)
+                    {       
+                        <td >
+                            <table id="@("td" + ribbon_button.Rows[i][1].ToString())" class="tbl_ribbon_right">
+                                <tr>
+                                    <td style="vertical-align: middle">
+                                        @if (ribbon_button.Rows[i][1].ToString() == "Edit" || ribbon_button.Rows[i][1].ToString() == "Delete")
+                                        {
+                                            <a href="@Url.Action("gotoUpdate" + (ribbon_button.Rows[i][4].ToString()) + "Form", (ribbon_button.Rows[i][4].ToString()), new { record_id = "00000000-0000-0000-0000-000000000000"})" , 
+                                                onclick = "EditLink(this);">
+                                                <img alt="imgRefresh" src="@("/Images/icon-" + ribbon_button.Rows[i][1] + ".png")" title="@(ribbon_button.Rows[i][1].ToString())" class="img_ribbon_icon"  /> 
+                                            </a>
+                                        }
+                                        else if (ribbon_button.Rows[i][1].ToString() == "New")
+                                        {
+                                            <a href="@Url.Action("gotoCreate" + (ribbon_button.Rows[i][4].ToString()) + "Form", (ribbon_button.Rows[i][4].ToString()))">
+                                                <img alt="imgRefresh" src="@("/Images/icon-" + ribbon_button.Rows[i][1] + ".png")" title="@(ribbon_button.Rows[i][1].ToString())" class="img_ribbon_icon"  /> 
+                                            </a>
+                                        }
+                                        else if (ribbon_button.Rows[i][1].ToString() == "Update")
+                                        {                                             
+                                            <img src="@("/Images/icon-" + ribbon_button.Rows[i][1] + ".png")" class="img_ribbon_icon" />
+                                        }
+                                        else if (ribbon_button.Rows[i][1].ToString() == "Log Time")
+                                        {
+                                            <img src="@("/Images/icon-" + ribbon_button.Rows[i][1] + ".png")" class="img_ribbon_icon" />
+                                        }
+                                        else
+                                        {
+                                            <img src="@("/Images/icon-" + ribbon_button.Rows[i][1] + ".png")" class="img_ribbon_icon" />
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align:middle">
+                                        @if (ribbon_button.Rows[i][1].ToString() == "Edit" || ribbon_button.Rows[i][1].ToString() == "Delete")
+                                        {
+                                            @Html.ActionLink(ribbon_button.Rows[i][1].ToString(), "gotoUpdate" + ribbon_button.Rows[i][4].ToString() + "Form", ribbon_button.Rows[i][4].ToString(),
+                                            new { record_id = "00000000-0000-0000-0000-000000000000" }, htmlAttributes: new { id = ribbon_button.Rows[i][1].ToString(), @class = "btn_link", onclick = "javascript:EditLink(this);" })
+                                        }
+                                        else if (ribbon_button.Rows[i][1].ToString() == "New")
+                                        {
+                                             @Html.ActionLink(ribbon_button.Rows[i][1].ToString(), "gotoCreate" + ribbon_button.Rows[i][4].ToString() + "Form", ribbon_button.Rows[i][4].ToString(), null,
+                                             htmlAttributes: new { id = ribbon_button.Rows[i][1].ToString(), @class = "btn_link" })    
+                                        }
+                                        else if (ribbon_button.Rows[i][1].ToString() == "Update")
+                                        {                                             
+                                            <input type="button" id="@(ribbon_button.Rows[i][1].ToString())" value="@ribbon_button.Rows[i][1]" />
+                                        }
+                                        else if (ribbon_button.Rows[i][1].ToString() == "Log Time")
+                                        {
+                                            <input type="button" id="LogTime" value="@ribbon_button.Rows[i][1].ToString().Replace(" ", "")" />
+                                        }
+                                        else
+                                        {
+                                            <input id="@(ribbon_button.Rows[i][1].ToString().Replace(" ", ""))" type="submit" value="@ribbon_button.Rows[i][1]" />
+                                        }
+                                    </td>
+                                </tr>                      
+                            </table> 
+                        </td>   
+                    }
+                }        
+            } 
+        </tr>
+    </table>
+</div>
+
+<div id="dv_section_left" class="dv_section_left">
+    @foreach (var item1 in (List<Models.Group>)ViewData["Group"])
+    {
+        <div id="@("dv" + item1.Name)"><h2 class="dv_group">@item1.Name</h2></div>   
+        <div id="@("dv" + item1.Name + "Container")">
+            @foreach (var item2 in (List<Models.GroupItem>)ViewData["GroupItem"])
+            {
+                if (item1.Id == item2.GroupId)
+                {                
+                    <div id="@("dv" + item2.Name)" class="dv_groupitem">
+                        <table>
+                            <tr>
+                                <td><img id="@("img" + item2.Name)" src="@("/Images/icon-" + item2.Name + ".png")" class="img_groupitem_icon" /></td>
+                                <td>@Html.ActionLink(@item2.Name, "Index", @item2.Name, null, htmlAttributes: new { @class = "h2_groupitem_text" })</td>
+                            </tr>
+                        </table>
+                    </div> 
+                }
+            }
+        </div>  
+    }
+</div>
+
+<div id="dv_section_right" class="dv_section_right"> 
+    @RenderBody()
+</div>
+
+<div id="dvCurrentEntity" class="dv_current_entity">
+   <h2 id="h2CurrentEntityName" class="h2_view_entity_text">@ViewBag.Page</h2>
+</div>
+
+<div id="dvCancellation" title="Confirm" class="dv_cancel">
+
+</div>
+
+<div id="dvOverlay" class="dv_overlay"></div>
+
+<script>
+    function EditLink(link) {
+        link.originalHref = link.originalHref || link.href;
+        var entity = $('#hdEntity').val();
+        var s_record_id = "00000000-0000-0000-0000-000000000000";
+        var count = 0;
+        $("input:checkbox[name=cboxOne]:checked").each(function () {
+            s_record_id = $(this).val();
+            count++;
+        });
+        if (count != 1) {
+            toastr.warning("You can only edit on record at the time.");
+            return null;
+        }
+        link.href = link.originalHref.replace("00000000-0000-0000-0000-000000000000", s_record_id);
+        return true;
+    }
+</script>
+
+
+

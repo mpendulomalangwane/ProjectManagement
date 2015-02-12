@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "IndexMessage";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model IEnumerable<Models.Message>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+<input type="hidden" value="Message" id="hdEntity" />
+<input type="hidden" value="Create" id="hdPage" />
+
+<div id="dvNothing"></div>
+
+<div id="dvSectionRight">    
+
+    <div id="dvCreateMessage" class="dv_entity_form">
+
+    @if(Model != null){
+        foreach(var item in Model){
+            <div id="dvMessageHeader" class="dv_message_header">
+                @Html.HiddenFor(m => item.Id)
+                <table class="tbl_email">
+                    <thead>
+                        <tr align="left">
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td align="left" style="width: 5px;"><input type="checkbox" /></td>
+                            <td align="left"><label class="msg_from">@Html.DisplayFor(m => item.FromName)</label></td>
+                            <td align="left"><label class="msg_time">@Html.DisplayFor(m => item.ReceivedTime)</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><label class="msg_subject">@Html.DisplayFor(m => item.Subject)</label> </td>
+                        </tr>
+                    </tbody>                    
+                </table>
+            </div>
+        }
+    }
+    </div>
+</div>
+
+<script>
+    $('.dv_message_header').click(function () {
+        var MsgId = $(this).find('input[type="hidden"]').val();        
+        $.ajax({
+            type: "get",
+            url: "/Message/gotoUpdateMessageForm",
+            data: { record_id: MsgId },
+            success: function (data) {
+                $("#dvNothing").html(data);
+                //$('#dvOverlay').show();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                error_handlerXML('Error occured while open SR', XMLHttpRequest);
+            }
+        });
+    });
+</script>

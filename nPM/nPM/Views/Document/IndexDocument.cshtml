@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "IndexDocument";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+    
+@model IEnumerable<Models.Document>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblEntityList').dataTable({
+            "sScrollX": "100%",
+            "sScrollXInner": "110%",
+            "bRetrieve": true
+        });
+    });  
+</script> 
+
+<input type="hidden" value="Document" id="hdEntity" />
+<input type="hidden" value="Index" id="hdPage" />
+
+<div id="dvSectionRight">
+
+    <table id="tblEntityList" class="tbl_entity_list">
+        <thead>            
+        <tr>
+            <th style="width:10px"><input id="cboxAll" type="checkbox" name="cboxAll"  /></th> 
+            <th >Name</th>
+            <th >Description</th>
+            <th >Type</th>
+            <th >Regarding Task</th>
+            <th >Uploaded By</th>
+            <th >Created On</th>
+        </tr>
+        </thead>
+        @if(Model != null){
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width:10px"><input type="checkbox" name="cboxOne" value="@Html.DisplayFor(m => item.Id)"/></td>
+                    <td >@Html.ActionLink(item.Name, "gotoUpdateDocumentForm", "Document", new { record_id = item.Id }, htmlAttributes: new { @class = "link" })</td>
+                    <td >@Html.DisplayFor(m => item.Description)</td>
+                    <td >@Html.DisplayFor(m => item.Type)</td>
+                    <td >@Html.ActionLink(item.TaskName, "gotoUpdateTaskForm", "Task", new { record_id = item.TaskId }, htmlAttributes: new { @class = "link" })</td>
+                    <td >@Html.ActionLink(item.UploadedByName, "gotoUpdateUserForm", "User", new { record_id = item.UploadedById }, htmlAttributes: new { @class = "link" })</td>
+                    <td >@Html.DisplayFor(m => item.CreatedOn)</td>
+                </tr>
+            }
+        </tbody>
+        }
+    </table>   
+
+
+</div>
+
+ 

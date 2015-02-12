@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "EditProject";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model Models.Document
+
+<input type="hidden" value="Client" id="hdEntity" />
+<input type="hidden" value="Update" id="hdPage" />
+
+<div id="dvSectionRight">
+    
+    <form id="frmUpdateClient" method="post" action="/Client/UpdateClient" >
+
+        @Html.HiddenFor( m => Model.Id)
+
+        <div class="dv_entity_form">
+
+            <br />
+            @if(Model.Type.Contains("image")){
+                
+                <br />
+                
+                <table id="tblCreateProject" class="tbl_entity_table">
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.TaskName, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.HiddenFor(m => m.TaskId)
+                        @Html.TextBoxFor(m => m.TaskName, htmlAttributes: new { @class = "txt_input_visible", @readonly = true })
+                        
+                   
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Latitude, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Latitude, htmlAttributes: new { @class = "txt_input_visible", @readonly = true  })
+                    </td>
+                    <td>
+                        @Html.LabelFor(m => m.Longitude, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Longitude, htmlAttributes: new { @class = "txt_input_visible", @readonly = true })
+                    </td>
+                </tr>
+
+                
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Location, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Location, htmlAttributes: new { @class = "txt_input_visible", @readonly = true  })
+                    </td>
+                     <td>
+                        @Html.LabelFor(m => m.TimeStamp, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.TimeStamp, htmlAttributes: new { @class = "txt_input_visible", @readonly = true  })
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextAreaFor(m => m.Description, htmlAttributes: new { @class = "txtarea_input_visible" })
+                    </td>
+                </tr>                
+                <tr>
+                </tr>
+            </table>
+                
+            <div class="dv_image_viewer">
+                <img src="@Url.Action("getDocument", "Document", new { record_id = Model.Id })" alt="@Model.Name" />
+            </div>
+                
+            }
+            else 
+            {
+            <div id="pdfRenderer" class="dv_pdfviewer" >
+                <object id="myPDF" data="@Url.Action("getDocument", "Document", new { record_id = Model.Id })" 
+                    type="application/pdf" width="100%" height="100%"></object>
+            </div>
+            }
+        </div>       
+
+        </form>
+</div>

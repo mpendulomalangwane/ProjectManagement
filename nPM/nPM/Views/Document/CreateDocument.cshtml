@@ -1,0 +1,198 @@
+﻿@{
+    ViewBag.Title = "AddDocument";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+@model Models.Document
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+<input type="hidden" value="Document" id="hdEntity" />
+<input type="hidden" value="Create" id="hdPage" />
+
+
+<div id="dvSectionRight">    
+
+    <form id="frmCreateDocument" action="/Document/CreateDocument"  method="post" enctype="multipart/form-data">
+        <div id="dvCreateDocument" class="dv_entity_form">
+
+            <h2 id="h2GM" class="h2_tab_title">Complete Document Form</h2>
+
+            <table id="tblCreateDocument" class="tbl_entity_table" >
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.TaskName, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.HiddenFor(m => m.TaskId)
+                        @Html.TextBoxFor(m => m.TaskName, htmlAttributes: new { @class = "txt_input_visible"})
+                        <script>
+                            $("#TaskName").autocomplete({
+                                source: function (request, response) {
+                                    $.ajax({
+                                        url: "/Document/getTask",
+                                        type: "get",
+                                        dataType: "json",
+                                        data: { term: request.term },
+                                        success: function (data) {
+                                            response($.map(data.success, function (item) {
+                                                return { value: item.Id, label: item.Name };
+                                            }))
+                                        }
+                                    });
+                                },
+                                minLength: 2,
+                                delay: 1,
+                                focus: function (event, ui) {
+                                    $("#TaskName").val(ui.item.label);
+                                    return false;
+                                },
+                                select: function (event, ui) {
+                                    event.preventDefault();
+                                    if (ui.item) {
+                                        $('#TaskName').val(ui.item.label);
+                                        $('#TaskId').val(ui.item.value);
+                                    }
+                                }
+                            });
+                        </script>
+                   
+                    </td>
+                    <td>
+                        @Html.LabelFor(m => m.Content, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor( m => m.Content, htmlAttributes: new { type = "file" })
+
+                        
+                        
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Latitude, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Latitude, htmlAttributes: new { @class = "txt_input_visible" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(m => m.Longitude, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Longitude, htmlAttributes: new { @class = "txt_input_visible" })
+                    </td>
+                </tr>
+
+                
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Location, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Location, htmlAttributes: new { @class = "txt_input_visible" })
+                    </td>
+                     <td>
+                        @Html.LabelFor(m => m.TimeStamp, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextBoxFor(m => m.TimeStamp, htmlAttributes: new { @class = "txt_input_visible" })
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "lbl_form" })
+                        <br />
+                        @Html.TextAreaFor(m => m.Description, htmlAttributes: new { @class = "txtarea_input_visible" })
+                    </td>
+                </tr>                
+                <tr>
+                </tr>
+            </table>
+
+        </div>
+    </form>
+
+</div>
+
+<script>
+
+    
+    document.getElementById("Content").onchange = function (e) {
+        debugger;
+
+        $('#Latitude').val("");
+        $('#Longitude').val("");
+        $('#TimeStamp').val("");
+
+        $('#Location').val("");
+
+
+        EXIF.getData(e.target.files[0], function () {
+
+            EXIF.getData(e.target.files[0],
+                function () {
+                    var aLat = EXIF.getTag(e.target.files[0], "GPSLatitude");
+                    var aLong = EXIF.getTag(e.target.files[0], "GPSLongitude");
+                    var sDate = EXIF.getTag(e.target.files[0], "DateTime");
+
+                    if (!(aLat && aLong)) return; // whoops, no GPS info  
+
+                    // convert from deg/min/sec to decimal for Google  
+                    var strLatRef = EXIF.getTag(e.target.files[0], "GPSLatitudeRef") || "N";
+                    var strLongRef = EXIF.getTag(e.target.files[0], "GPSLongitudeRef") || "W";
+                    var fLat = (aLat[0] + aLat[1] / 60 + aLat[2] / 3600) * (strLatRef == "N" ? 1 : -1);
+                    var fLong = (aLong[0] + aLong[1] / 60 + aLong[2] / 3600) * (strLongRef == "W" ? -1 : 1);
+
+                    $('#Latitude').val(fLat);
+                    $('#Longitude').val(fLong);
+                    $('#TimeStamp').val(sDate);
+
+                    initialize();
+                    codeLatLng();
+                }
+            );
+
+        });
+    }
+    $('#TimeStamp').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        minDate: 0,
+        showButtonPanel: true
+    });
+
+        
+        var geocoder;
+        var map;
+        var infowindow = new google.maps.InfoWindow();
+        var marker;
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+        }
+
+        function codeLatLng() {            
+            var input = $('#Latitude').val() + "," + $('#Longitude').val();
+            var latlngStr = input.split(',', 2);
+            var lat = parseFloat(latlngStr[0]);
+            var lng = parseFloat(latlngStr[1]);
+            var latlng = new google.maps.LatLng(lat, lng);
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        infowindow.setContent(results[1].formatted_address);
+                        infowindow.open(map, marker);
+
+                        //set location on textbox
+                        $('#Location').val(results[1].formatted_address);
+
+                    } else {
+                        //alert('No results found');
+                    }
+                } else {
+                    //alert('Geocoder failed due to: ' + status);
+                }
+            });
+        }
+
+
+</script>
+

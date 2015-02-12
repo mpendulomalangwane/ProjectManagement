@@ -1,0 +1,342 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+@model Models.Project
+
+<input type="hidden" value="Project" id="hdEntity" />
+<input type="hidden" value="Edit" id="hdPage" />
+<input type="hidden" value="view" id="hdState" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.tbl_my_entities').dataTable({
+            "sScrollX": "100%",
+            "bRetrieve": true,
+            "iDisplayLength": 5,
+            "sScrollXInner": "110%"
+        });
+    });
+</script> 
+
+<div id="dvNothing"></div>
+
+<div id="dvSectionRight">
+
+    <form id="frmUpdateProject" method="post" action="/Project/UpdateProject">
+        @Html.HiddenFor(m => Model.Id)
+        <div id="dvCreateProjects" class="dv_entity_form" >
+
+            <div>
+                <table>
+                    <tr>
+                        <td colspan="1">
+                            <img src="~/Images/icon-project.png" class="imgSubLogo" style="width: 100px; height: 100px;" />
+                        </td>
+                        <td colspan="1">
+                            <h2 class="h2_view_entity_text">@Model.Name</h2>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div align="right" class="dv_tab" style="background-color: transparent; border: none">
+                <table>
+                    <tr>  
+                        <td style="border: 0px solid #808080; width: 15px">
+                            <a href="@Url.Action("gotoUpdateProjectForm","Project", new { record_id = Model.Id})">
+                                <img alt="imgRefresh" src="~/Images/icon-Refresh.png" title="Refresh" class="img_refresh"  /> 
+                            </a>
+                            <div id="dv_tooltip_refresh" class="dv_tooltip">Refresh</div>  
+                        </td>
+                    </tr>
+                </table>
+                
+            </div> 
+              
+            <div id="dvGeneralInfo" class="dv_tab">   
+                <h2 class="h2_tab_title">General Information</h2>
+                <hr/> 
+                <table id="tblCreateProject" class="tbl_entity_table">
+                    <tr>
+                        <td>
+                            @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.Budget, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.Budget, htmlAttributes: new { @class = "txt_input_visible" })
+                            <script>
+                                //$("#Budget").spinner();
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.StartTime, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.StartTime, htmlAttributes: new { @class = "txt_input_visible", @readonly = true } )
+                            <script>
+                                //$('#StartDate').datepicker();
+                            </script>
+                        </td>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.EndTime, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextBoxFor(m => m.EndTime, htmlAttributes: new { @class = "txt_input_visible" , @readonly = true })
+                            <script>
+                                //$('#EndDate').datepicker();
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.ClientName, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            <table style="width: 100%">
+                                <tr>
+                                    <td>
+                                        @Html.HiddenFor(m => m.ClientId)
+                                        @Html.TextBoxFor(m => m.ClientName, htmlAttributes: new { @class = "txt_input_visible" })
+                                    </td>
+                                </tr>
+                            </table>    
+                            <script>
+                                $("#ClientName").autocomplete({
+                                    source: function (request, response) {
+                                        $.ajax({
+                                            url: "/Project/getClients",
+                                            type: "get",
+                                            dataType: "json",
+                                            data: { term: request.term },
+                                            success: function (data) {
+                                                response($.map(data.success, function (item) {
+                                                    return { value: item.Id, label: item.Name };
+                                                }))
+                                            }
+                                        });
+                                    },
+                                    minLength: 2,
+                                    delay: 1,
+                                    focus: function (event, ui) {
+                                        $("#ClientName").val(ui.item.label);
+                                        return CompanyName;
+                                    },
+                                    select: function (event, ui) {
+                                        event.preventDefault();
+                                        if (ui.item) {
+                                            $('#ClientName').val(ui.item.label);
+                                            $('#ClientId').val(ui.item.value);
+                                        }
+                                    }
+                                });
+	                    </script>              
+                        </td>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.ManagerName, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td >                                        
+                                        @Html.HiddenFor(m => m.ManagerId)
+                                        @Html.TextBoxFor(m => m.ManagerName, htmlAttributes: new { @class = "txt_input_visible" })
+                                    </td>
+                                </tr>
+                            </table>
+                            <script>
+                                $("#ManagerName").autocomplete({
+                                    source: function (request, response) {
+                                        $.ajax({
+                                            url: "/Project/getPM",
+                                            type: "get",
+                                            dataType: "json",
+                                            data: { term: request.term },
+                                            success: function (data) {
+                                                response($.map(data.success, function (item) {
+                                                    return { value: item.Id, label: item.Name };
+                                                }))
+                                            }
+                                        });
+                                    },
+                                    minLength: 2,
+                                    delay: 1,
+                                    focus: function (event, ui) {
+                                        $("#ManagerName").val(ui.item.label);
+                                        return false;
+                                    },
+                                    select: function (event, ui) {
+                                        event.preventDefault();
+                                        if (ui.item) {
+                                            $('#ManagerName').val(ui.item.label);
+                                            $('#ManagerId').val(ui.item.value);
+                                        }
+                                    }
+                                });
+	                        </script>
+                        </td>                                   
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            @Html.LabelFor(m => m.StateName, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.HiddenFor(m => m.StateId)
+                            @Html.TextBoxFor(m => m.StateName, htmlAttributes: new { @class = "txt_input_visible" })           
+                            <div class="dv_state">
+                            @{   
+                                    var state = (List<Models.AnyEntity>)ViewData["States"];
+                                    foreach (var item in (List<Models.AnyEntity>)ViewData["States"])
+                                    {
+                                        <div class="dv_state_option" id="@item.Id">@item.Name</div>
+                                    }
+                                }
+                            </div>                 
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br />
+                            @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "lbl_form" }):
+                            <br />
+                            @Html.TextAreaFor(m => m.Description, htmlAttributes: new { @class = "txtarea_input_visible" })
+                            <br />
+                        </td>
+                    </tr>
+                </table>   
+            
+            </div>
+           
+            <br />
+
+            <div id="dvTasks" class="dv_related_rec_tab">  
+                <div id="dvOptions">
+                    <table style="width: 100%">
+                        <tr>
+                            
+                            <td align="left">
+                                <h2 id="h2SR" class="h2_tab_title">Tasks</h2>
+                            </td>
+                            <td align="right">
+                                <table  style="width: 100%">
+                                    <tr>
+                                        <td><div></div></td>
+                                        <td align="Right">
+                                            <img id="imgAddProjectTask" src="~/Images/icon-plus.png" class="img_table_icon" title="Add task to this project" />
+                                            <img id="imgRemoveProjectTask" src="~/Images/icon-minus.png" class="img_table_icon" style="display: none" title="Remove task from this project" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr/> 
+                @{
+                    var tasks = (List<Models.AnyEntity>)ViewData["Tasks"];
+                    if (tasks != null)
+                    {
+                        <div id="dvTask">            
+                            <table id="tblAllTasks"  class="tbl_my_entities">
+                                <thead>            
+                                    <tr>       
+                                        <th style="width: 10px;"></th>     
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var item in (List<Models.AnyEntity>)ViewData["Tasks"])
+                                { 
+                                    <tr>    
+                                        <td style="width: 10px;"><input type="checkbox" name="removeTask" value="@Html.DisplayFor(m => item.Id)"/></td>
+                                        <td>@Html.ActionLink(item.Name, "gotoUpdateTaskForm", "Task", new { record_id = item.Id }, htmlAttributes: new { @class = "link" })</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+            </div>
+
+            <br />
+
+            <div id="dvUsers" class="dv_related_rec_tab">  
+                <div >
+                    <table style="width: 100%">
+                        <tr>
+                            <td align="left">
+                                <h2 class="h2_tab_title">Users</h2>
+                            </td>
+                            <td align="right">
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td>
+                                            <div id="dvTeamlessUser" class="dv_hidden">
+                                                <table id="tblTeamLessUser" class="tbl_entity_list">
+                                                </table>
+                                            </div>
+                                        </td>
+                                        <td align="Right">
+                                            <img id="imgprojectAddUser" src="~/Images/icon-plus.png" class="img_table_icon" title="Add user to this project" />
+                                        </td>
+                                        <td>
+                                            <img id="imgprojectRemoveUser" src="~/Images/icon-minus.png" class="img_table_icon" style="display: none" title="Remove user from this project" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr/> 
+                @{
+                    var users = (List<Models.AnyEntity>)ViewData["Users"];
+                    if (users != null)
+                    {
+                        <div >            
+                            <table id="tblUsers"  class="tbl_my_entities">
+                                <thead>            
+                                    <tr>       
+                                        <th style="width: 10px;"></th>     
+                                        <th>Fullname</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var item in (List<Models.AnyEntity>)ViewData["Users"])
+                                { 
+                                    <tr>    
+                                        <td style="width: 10px;"><input type="checkbox" name="removeUser" value="@Html.DisplayFor(m => item.Id)"/></td>
+                                        <td>@Html.ActionLink(item.Name, "gotoUpdateUserForm", "User", new { record_id = item.Id }, htmlAttributes: new { @class = "link" })</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+            </div>
+
+            <br />
+
+        </div>
+
+    </form>
+
+</div>
+
+<div id="dv">
+
+</div>
+
+<script>
+
+</script>

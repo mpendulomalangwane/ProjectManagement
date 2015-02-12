@@ -1,0 +1,78 @@
+﻿
+/*
+    Divs
+*/
+
+.dv_top {
+    position: fixed;
+    width: 99%;
+    height: 25%;
+    top: 0.5%;
+    left: 0.5%;
+    border: 0px solid #808080;
+    border-bottom: 10px solid #808080;
+    background-color: #eb7707;
+    z-index: 99;
+}
+
+.dv_login {
+    position: fixed;
+    width: 99%;
+    height: 40%;
+    top: 26.5%;
+    left: 0.5%;
+    border: 0px solid #808080;
+    background-color: #ebe9e9;
+    z-index: 99;
+    text-align: center;
+}
+
+.dv_bottom {
+    position: fixed;
+    width: 99%;
+    height: 32.5%;
+    top: 65.5%;
+    left: 0.5%;
+    border: 0px solid #808080;
+    border-top: 10px solid #808080;
+    background-color: #eb7707;
+    z-index: 99;
+}
+
+/*
+    Buttons
+*/
+.btn{
+    height: 40px;
+    width: 150px;
+    background-color: #eb7707;
+    border: 0px solid #808080;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+
+
+/*
+    Textbox
+*/
+.txt_input_visible {
+    width: 90%;
+    height: 35px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #808080;
+    padding-left: 5px;
+    padding-right: 5px;   
+}
+
+/*
+    Labels
+*/
+.h2_login_text {
+    color: #808080;
+    font-weight: 100;
+    font-size: 30px;
+    font-family: "Agency FB";
+}

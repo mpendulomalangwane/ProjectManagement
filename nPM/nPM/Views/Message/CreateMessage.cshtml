@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "CreateMessage";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta charset="utf-8">
+
+
+@model Models.Message
+
+
+@*<script src="~/Scripts/HelperScripts/wysihtml5-0.3.0.js"></script>
+<script src="~/Scripts/HelperScripts/prettify.js"></script>
+<script src="~/Scripts/HelperScripts/bootstrap.min.js"></script>
+<script src="~/Scripts/HelperScripts/bootstrap-wysihtml5.js"></script>
+
+
+
+<link href="~/Content/HelperCss/prettify.css" rel="stylesheet" />
+<link href="~/Content/HelperCss/bootstrap-wysihtml5.css" rel="stylesheet" />
+<link href="~/Content/HelperCss/bootstrap.css" rel="stylesheet" />*@
+
+<input type="hidden" value="Message" id="hdEntity" />
+<input type="hidden" value="Create" id="hdPage" />
+
+
+<div id="dvSectionRight">
+
+    <form id="frmCreateMessage" method="post" action="/Message/CreateMessage">
+
+        <div id="dvCreateMessage" class="dv_entity_form">
+
+            @Html.HiddenFor(m => m.FromName, htmlAttributes: new { Value = (string)@ViewBag.FromName  })
+            @Html.HiddenFor(m => m.FromId, htmlAttributes: new { Value = (Guid)@ViewBag.FromId  })
+
+            <table class="tbl_email">
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.recipient.ToName, htmlAttributes: new { @class = "lbl_form" }):
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.recipient.ToName, htmlAttributes: new { @class = "txt_input_visible" })
+                        @Html.HiddenFor(m => m.recipient.ToId)
+                        <hr />
+                        <script>
+                            $(function () {
+
+                                function split(val) {
+                                    return val.split(/;\s*/);
+                                }
+                                function extractLast(term) {
+                                    return split(term).pop();
+                                }
+
+                                $("#recipient_ToName")
+                                  // don't navigate away from the field on tab when selecting an item
+                                  .bind("keydown", function (event) {
+                                      if (event.keyCode === $.ui.keyCode.TAB &&
+                                          $(this).data("ui-autocomplete").menu.active) {
+                                          event.preventDefault();
+                                      }
+                                  })
+                                  .autocomplete({
+                                      minLength: 0,
+                                      source: function (request, response) {
+                                          $.ajax({
+                                              url: "/Message/getUsers",
+                                              type: "get",
+                                              dataType: "json",
+                                              data: { term: extractLast(request.term) },
+                                              success: function (data) {
+                                                  var object = [];
+                                                  for (var i = 0; i < data.success.length; i++) {
+                                                      object.push(data.success[i].Name);
+                                                  }
+                                                  response($.ui.autocomplete.filter(
+                                                    object, extractLast(request.term)));
+                                              }
+                                          });
+                                      },
+                                      minLength: 2,
+                                      delay: 1,
+                                      focus: function () {
+                                          // prevent value inserted on focus
+                                          return false;
+                                      },
+                                      select: function (event, ui) {
+                                          var terms = split(this.value);
+                                          // remove the current input
+                                          terms.pop();
+                                          // add the selected item
+                                          terms.push(ui.item.value);
+
+                                          // add placeholder to get the comma-and-space at the end
+                                          terms.push("");
+                                          this.value = terms.join("; ");
+                                          return false;
+                                      }
+                                  });
+                            });
+            </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Subject, htmlAttributes: new { @class = "lbl_form" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Subject, htmlAttributes: new { @class = "txt_input_visible" })
+                        <hr />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                         @Html.TextAreaFor(m => m.Text, htmlAttributes: new { @class = "txtarea_email_input_visible" })
+                        <script>
+                            //$('#Text').wysihtml5();
+                        </script>
+                        <script type="text/javascript" charset="utf-8">
+                            //$(prettyPrint);
+                        </script>
+                    </td>
+                </tr>
+            </table>
+
+
+
+
+        </div>
+    </form>
+</div>

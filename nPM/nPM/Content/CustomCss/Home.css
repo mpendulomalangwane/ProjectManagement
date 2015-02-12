@@ -1,0 +1,43 @@
+﻿
+
+/*
+    Divs
+*/
+
+
+
+/*
+    Buttons
+*/
+
+input[type=submit] {
+    font-family: "Agency FB";
+}
+input[type=button] {
+    font-family: "Agency FB";
+}
+
+.btn_menu {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 100;    
+}
+
+
+.btn_menu:hover {
+    text-decoration: underline;
+}
+
+
+
+/*
+    Textbox
+*/
+
+
+
+
+/*
+    Table tags
+*/

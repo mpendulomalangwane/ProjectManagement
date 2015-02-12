@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "UpdateTeam";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+@model Models.Team
+
+<div id="dvNothing">
+</div>
+
+<div id="dvSectionRight">
+
+    <form id="frmViewTeam" method="post" action="/Team/editTeam">
+
+        @Html.HiddenFor( m => Model.Id)
+
+        <div id="dvCreateTeam" class="dv_entity_form" >
+
+            <div>
+                <table>
+                    <tr>
+                        <td colspan="1">
+                            <img src="~/Images/icon-team.png" class="imgSubLogo" style="width: 100px; height: 100px;" />
+                        </td>
+                        <td colspan="1">
+                            <h2 class="h2_current_entity_page">@Model.Name</h2>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div align="right" class="dv_tab" style="background-color: transparent; border: none">
+                <table >
+                    <tr>   
+                        <td style="border: 0px solid #808080; width: 15px">                           
+                        </td>
+                        <td style="border: 0px solid #808080; width: 15px">
+                            <a href="@Url.Action("gotoUpdateTeamForm","Team", new { record_id = Model.Id})">
+                                <img alt="imgRefresh" src="~/Images/icon-Refresh.png" title="Refresh" class="img_refresh"  /> 
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div id="dvGeneralInfo" class="dv_tab">    
+                <h2 class="h2_tab_title">General Information</h2>
+                <hr />
+                <div>            
+                    <table id="tblCreateTeam" class="tbl_entity_table">
+                        <tr>
+                            <td>
+                                @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "lbl_form" })
+                                <br />
+                                @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "txt_short_input_visible" })
+                            </td>
+                            <td></td>
+                        </tr>
+
+                    </table>   
+                </div>
+            </div>
+
+            <br />
+            
+            <div id="dvTeamsMembers" class="dv_related_rec_tab"> 
+                <div id="dvOptions">
+                    <table style="width: 100%">
+                        <tr>
+                            <td align="left">
+                                <h2 id="h2SR" class="h2_tab_title">Team Members</h2>
+                            </td>
+                            <td align="right">                                
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img id="imgTeamAddUser" src="~/Images/icon-AddUsertoTeam.png" class="img_table_icon" title="Add user to this team" />
+                                        </td>
+                                        <td>
+                                            <img id="imgTEamRemoveUser" src="~/Images/icon-RemoveUserfromTeam.png" class="img_table_icon" style="display: none" title="Remove user from this team" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />
+            
+                @{
+                    var users = (List<Models.User>)ViewData["Users"];
+                    if (users != null)
+                    {
+                        <div id="dvTeamUsers" class="tbl_tab">            
+                            <table id="tblAllTeam"  class="tbl_my_entities">
+                                <thead>            
+                                    <tr>       
+                                        <th style="width: 10px;"></th> 
+                                        <th>Fullname</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var item in (List<Models.User>)ViewData["Users"])
+                                { 
+                                    <tr>    
+                                        <td><input type="checkbox" name="cboxTeam" value="@Html.DisplayFor(m => item.Id)"/></td>
+                                        <td>@Html.ActionLink(item.FullName, "gotoUpdateUserForm", "User", new { record_id = item.Id }, htmlAttributes: new { @class = "link" })</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,48 @@
+﻿@model Models.Message
+
+<input type="hidden" value="Message" id="hdEntity" />
+
+<div id="dv_popup" class="dv_popup_message">
+    
+    @Html.HiddenFor(m => Model.Id)         
+    <div id="dvMessageHeader" class="dv_message_headers">
+        <table style="width: 100%">
+            
+            <tbody>
+                <tr>
+                    <td align="left">@Html.LabelFor(m => m.FromName) <label class="msg_sfrom">@Html.DisplayFor(m => m.FromName)</label></td>
+                    <td align="left"><label class="msg_time">@Html.DisplayFor(m => m.ReceivedTime)</label></td>
+                </tr>
+                 <tr>
+                    <td align="left">@Html.LabelFor(m => m.recipient.ToName)<label class="msg_to">@Html.DisplayFor(m => m.recipient.ToName)</label></td>
+                </tr>
+                <tr>
+                    <td colspan=""><label class="msg_subject">@Html.DisplayFor(m => m.Subject)</label> </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.TextAreaFor(m => m.Text, htmlAttributes: new { @class = "txtarea_email_input_visible" })
+                    </td>
+                </tr>
+            </tbody>                    
+        </table>        
+        <input type="button" id="btnCancel" class="btn_cancel" value="Close" style="left: 78%; top: 82%" />
+        <script>
+            $('#btnCancel').click(function () {
+                $.ajax({
+                    type: "get",
+                    url: "/Message/Index",
+                    success: function (data) {
+                        $("#dvNothing").html(data);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        error_handlerXML('Error occured while open SR', XMLHttpRequest);
+                    }
+                });
+            });
+
+        </script>
+    </div>
+
+</div>
+

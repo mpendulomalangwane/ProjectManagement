@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "EditProject";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model Models.Client
+
+<input type="hidden" value="Client" id="hdEntity" />
+<input type="hidden" value="Update" id="hdPage" />
+
+<div id="dvSectionRight">
+
+    <form id="frmUpdateClient" method="post" action="/Client/UpdateClient" >
+        
+        @Html.HiddenFor( m => Model.Id)
+
+        <div class="dv_entity_form">
+
+            <div>
+                <table class="">
+                    <tr>
+                        <td colspan="1">
+                            <img src="~/Images/icon-Client.png" class="img_view_entity_logo" />
+                        </td>
+                        <td colspan="1">
+                            <h2 class="h2_view_entity_text">@Model.Name</h2>
+                        </td>
+                    </tr>
+                </table>
+            </div>  
+
+            <div align="right" class="dv_tab" style="background-color: transparent; border: none">
+                <table >
+                    <tr>   
+                        <td>
+                        </td>
+                        <td style="border: 0px solid #808080; width: 15px">                   
+                        </td>
+                        <td style="border: 0px solid #808080; width: 15px">
+                            <a href="@Url.Action("gotoUpdateClientForm","Client", new { record_id = Model.Id})">
+                                <img id="imgRefresh" alt="imgRefresh" src="~/Images/icon-Refresh.png" title="Refresh" class="img_refresh"  /> 
+                            </a>
+                            <script>
+                                $('#imgRefresh').hover(function () {
+                                    $('#dv_tooltip_refresh').show();
+                                    //$("#dv_tooltip_refresh").hide(300).delay(2000).fadeOut(400);
+                                });
+                                $('#imgRefresh').mouseout(function () {
+                                    $("#dv_tooltip_refresh").hide(300).delay(2000).fadeOut(400);
+                                });
+                            </script>
+                            <div id="dv_tooltip_refresh" class="dv_tooltip">Refresh</div>  
+                        </td>
+                    </tr>
+                </table>
+                
+            </div> 
+
+            <div id="dvGeneralInfo" class="dv_tab" >   
+                
+                <h2 id="h2GM" class="h2_tab_title">Client Information</h2>
+                                
+                <table id="tblCreateUser" class="tbl_entity_table">
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.Name)
+                            <br />
+                            @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(m => m.Email)
+                            <br />
+                            @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            @Html.DisplayNameFor(m => m.Fax)
+                            <br />
+                            @Html.TextBoxFor(m => m.Fax, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                        <td>
+                            <br />
+                            @Html.DisplayNameFor(m => m.Telephone)
+                            <br />
+                            @Html.TextBoxFor(m => m.Telephone, htmlAttributes: new { @class = "txt_input_visible" })
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <br />
+                        @Html.DisplayName("Province")
+                        <br />
+                        @Html.TextBox("Province", null, new { @class = "txt_input_visible" })
+                    </td>
+                    <td>
+                        <br />
+                        @Html.DisplayName("City")
+                        <br />
+                        @Html.TextBox("City", null, new { @class = "txt_input_visible" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        @Html.DisplayName("Street Address")
+                        <br />
+                        @Html.TextArea("StreetAddress", null, new { @class = "txtarea_input_visible" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        @Html.DisplayName("Postal Code")
+                        <br />
+                        @Html.TextBox("PostalCode", null, new { @class = "txt_short_input_visible" })
+                    </td>
+                </tr>
+                </table>   
+            
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
